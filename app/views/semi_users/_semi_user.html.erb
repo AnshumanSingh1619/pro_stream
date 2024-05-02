@@ -1,0 +1,27 @@
+<div id="<%= dom_id semi_user %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= semi_user.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Date of birth:</strong>
+    <%= semi_user.date_of_birth %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Age:</strong>
+    <%= semi_user.age %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">User:</strong>
+    <%= semi_user.user_id %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this semi user", semi_user, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Edit this semi user", edit_semi_user_path(semi_user), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

@@ -69,3 +69,7 @@ end
 gem "tailwindcss-rails", "~> 2.5"
 
 gem "render_build_setup", "~> 0.0.1"
+
+#for authentication
+gem "devise"
+gem 'devise-jwt'

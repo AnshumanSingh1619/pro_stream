@@ -1,0 +1,74 @@
+<style>
+    
+body{
+    background-color:black;
+    height:100% ;
+  }
+
+  a{   
+    color:red;
+  }  
+  
+  .container{
+    margin:auto;
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding:25px;
+    width: 35%;
+    color: black;
+    border-radius:25px;
+    box-shadow: 0px 0px 8px 2px black;
+  }
+
+  .radio{
+    margin: 0 10px 0 0;
+  }
+  
+  .inp{
+    
+    width: 100%;
+    height: auto;
+    margin:5px;
+    font-size:20px;
+  }
+  .lab{
+    color:greenyellow;
+    font-size:20px;
+}
+h3{
+  margin-top:10px;
+}
+.forms button{
+  margin: 10px 0;
+}
+</style>
+
+<div class="container">
+  <h2>Change your password</h2>
+  
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "admins/shared/error_messages", resource: resource %>
+    <%= f.hidden_field :reset_password_token %>
+  
+    <div class="field">
+      <%= f.label :password, "New password" %><br />
+      <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+      <% end %>
+      <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class:"inp"  %>
+    </div>
+  
+    <div class="field">
+      <%= f.label :password_confirmation, "Confirm new password" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"inp"  %>
+    </div>
+  
+    <div class="actions">
+      <%= f.submit "Change my password", class:"btn btn-success" %>
+    </div>
+  <% end %>
+  
+  <%= render "admins/shared/links" %>
+</div>
