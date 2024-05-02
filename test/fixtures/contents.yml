@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  language: MyString
+  name: MyString
+  movie_type: MyString
+  available_for_kids: false
+  type_of_content: MyString
+  actor: MyString
+  description: MyText
+  director: MyString
+
+two:
+  language: MyString
+  name: MyString
+  movie_type: MyString
+  available_for_kids: false
+  type_of_content: MyString
+  actor: MyString
+  description: MyText
+  director: MyString

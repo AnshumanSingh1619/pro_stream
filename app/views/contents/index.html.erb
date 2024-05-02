@@ -1,0 +1,35 @@
+<div class="col-lg-12">
+  <%= link_to "Create content", new_content_path, class: "text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" %>
+  <h3 class="mt-4 mb-4">Contents</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <% @contents.each do |content| %>
+      <div class="max-w-sm rounded overflow-hidden shadow-lg">
+        <% if content.poster.present? %>
+          <div style="height: 200px;">
+            <%= link_to content_path(content) do %>
+              <img src="<%= url_for(content.poster) %>" class="w-full h-full object-cover" />
+            <% end %>
+          </div>
+        <% end %>
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2"><%= content.name %></div>
+          <p class="text-gray-700 text-base">
+            <%= content.description %> <br>
+            <% content.type_of_content.each do |content_type| %>
+              <%= "#{content_type}" %><br>
+            <% end %>
+            <% content.languages.each do |l| %>
+              <%= "#{l}" %><br>
+            <% end %>
+            <strong>Actor:</strong> <%= content.actor %>
+          </p>
+        </div>
+        <% if admin_signed_in? %>
+          <div class="px-6 pt-4 pb-2">
+            <%= link_to "Edit", edit_content_path(content), class: "btn btn-red" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

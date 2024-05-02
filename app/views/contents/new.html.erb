@@ -1,0 +1,16 @@
+<style>
+  .inp{
+    width: 50%;
+    height: auto;
+    margin:5px;
+    font-size:20px;
+  }
+</style>
+<div class="container">
+  <h1>New content</h1>
+  <%= render "form", content: @content, class:"btn btn-success mt-1" %>
+  <br>
+  <div>
+    <%= link_to "Back to contents", contents_path, class:"btn btn-success mt-1" %>
+  </div>
+</div>  

@@ -1,0 +1,16 @@
+<div class="nested-fields">
+  <%= f.label :season_no %>
+  <%= f.number_field :season_no %>
+
+  <h3>Episodes</h3>
+  <div id="episodes">
+    <%= f.fields_for :episodes do |episode_form| %>
+      <%= render 'episode_fields', f: episode_form, class:"inp" %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'Add Episode', f, :episodes, class: "btn btn-secondary" %>
+    </div>
+  </div>
+  
+  <%= link_to_remove_association "Delete", f, class: "btn btn-danger" %>
+</div>

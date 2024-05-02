@@ -73,3 +73,7 @@ gem "render_build_setup", "~> 0.0.1"
 #for authentication
 gem "devise"
 gem 'devise-jwt'
+
+# to handel nested attributes
+gem 'cocoon'
+gem 'jquery-rails'
