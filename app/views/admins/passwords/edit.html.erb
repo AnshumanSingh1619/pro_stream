@@ -1,15 +1,8 @@
 <style>
-    
-body{
-    background-color:black;
-    height:100% ;
-  }
-
   a{   
     color:red;
   }  
-  
-  .container{
+  .conta{
     margin:auto;
     position:absolute;
     top: 50%;
@@ -21,31 +14,15 @@ body{
     border-radius:25px;
     box-shadow: 0px 0px 8px 2px black;
   }
-
-  .radio{
-    margin: 0 10px 0 0;
-  }
-  
-  .inp{
-    
+  .inp{ 
     width: 100%;
     height: auto;
     margin:5px;
     font-size:20px;
   }
-  .lab{
-    color:greenyellow;
-    font-size:20px;
-}
-h3{
-  margin-top:10px;
-}
-.forms button{
-  margin: 10px 0;
-}
 </style>
 
-<div class="container">
+<div class="conta">
   <h2>Change your password</h2>
   
   <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>

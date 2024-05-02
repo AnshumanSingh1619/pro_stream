@@ -1,13 +1,8 @@
 <style>  
-  body{
-    background-color:black;
-    height:100% ;
-  }
-
   a{
     color:red;
   }  
-  .container{
+  .conta{
     margin:auto;
     position:absolute;
     top: 50%;
@@ -42,7 +37,7 @@
   }
 </style>
 
-<div class="container">
+<div class="conta">
   <h2>Forgot your password?</h2>
   
   <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>

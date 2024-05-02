@@ -1,14 +1,45 @@
-<h2>Log in</h2>
+<style>
+  a{
+    color:red;
+  }  
+  .conta{
+    margin:auto;
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding:25px;
+    width: 35%;
+    color: black;
+    border-radius:25px;
+    box-shadow: 0px 0px 8px 2px black;
+  }
+  .inp{
+    width: 100%;
+    height: auto;
+    margin:5px;
+    font-size:20px;
+  }
+  
+  .lab{
+    color:red;
+    font-size:20px;
+}
 
+</style>
+
+<div class="conta">
+<h2>Log in</h2>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :email ,class:"lav"%><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"inp" %>
+    <p>We'll never share your email with anyone else.</p>
   </div>
 
   <div class="field">
     <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+    <%= f.password_field :password, autocomplete: "current-password",class:"inp" %>
   </div>
 
   <% if devise_mapping.rememberable? %>
@@ -19,8 +50,8 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "Log in" ,class:"btn btn-success"%>
   </div>
 <% end %>
-
 <%= render "users/shared/links" %>
+</div>
