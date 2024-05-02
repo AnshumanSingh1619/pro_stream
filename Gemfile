@@ -77,3 +77,4 @@ gem 'devise-jwt'
 # to handel nested attributes
 gem 'cocoon'
 gem 'jquery-rails'
+

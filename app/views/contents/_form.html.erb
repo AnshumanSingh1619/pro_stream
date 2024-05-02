@@ -11,70 +11,71 @@
   <% end %>
 
   <div>
-    <%= form.label :languages, style: "display: block" %>
-    <%= form.select :languages, options_for_select(["Hindi", "English", "Tamil", "Telgu", "Malayalam", "Marathi", "Spanish"]), { multiple: true }, class:"inp" %>
+    <%= form.label :languages, class: "block font-bold" %>
+    <%= form.select :languages, options_for_select(["Hindi", "English", "Tamil", "Telgu", "Malayalam", "Marathi", "Spanish"]), { multiple: true }, class: "inp" %>
   </div>
 
   <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name, class:"inp" %>
+    <%= form.label :name, class: "block font-bold" %>
+    <%= form.text_field :name, class: "inp" %>
   </div>
 
   <div>
-    <%= form.label :available_for_kids, style: "display: block" %>
-    <%= form.select :available_for_kids, options_for_select(["for 18+ only", "Available for all"]), class:"inp" %>
+    <%= form.label :available_for_kids, class: "block font-bold" %>
+    <%= form.select :available_for_kids, options_for_select(["for 18+ only", "Available for all"]), class: "inp" %>
   </div>
 
   <div>
-    <%= form.label :type_of_content, style: "display: block" %>
-    <%= form.select :type_of_content, options_for_select(["Action", "Romance", "Science", "Thrillers", "Horror", "Bollywood", "Documentaries", "Dramas"]), { multiple: true }, class:"inp" %>
+    <%= form.label :type_of_content, class: "block font-bold" %>
+    <%= form.select :type_of_content, options_for_select(["Action", "Romance", "Science", "Thrillers", "Horror", "Bollywood", "Documentaries", "Dramas"]), { multiple: true }, class: "inp" %>
   </div>
 
   <div>
-    <%= form.label :actor, style: "display: block" %>
-    <%= form.text_field :actor, class:"inp" %>
+    <%= form.label :actor, class: "block font-bold" %>
+    <%= form.text_field :actor, class: "inp" %>
   </div>
 
   <div>
-    <%= form.label :discription, style: "display: block" %>
-    <%= form.text_area :discription, class:"inp" %>
+    <%= form.label :description, class: "block font-bold" %>
+    <%= form.text_area :description, class: "inp" %>
   </div>
 
   <div>
-    <%= form.label :director, style: "display: block" %>
-    <%= form.text_field :director, class:"inp" %>
+    <%= form.label :director, class: "block font-bold" %>
+    <%= form.text_field :director, class: "inp" %>
   </div>
 
   <div>
-    <%= form.label :trailer, style: "display: block" %>
-    <%= form.file_field :trailer, accept: "video/*" , class: "btn btn-danger" %>
+    <%= form.label :trailer, class: "block font-bold" %>
+    <%= form.file_field :trailer, accept: "video/*", class: "btn btn-danger mt-2 mb-2" %>
   </div>
 
   <div>
-    <%= form.label :movie, style: "display: block" %>
-    <%= form.file_field :movie, accept: "video/*", class: "btn btn-danger"  %>
+    <%= form.label :movie, class: "block font-bold" %>
+    <%= form.file_field :movie, accept: "video/*", class: "btn btn-danger mt-2 mb-2" %>
   </div>
 
   <div>
-    <%= form.label :poster, style: "display: block" %>
-    <%= form.file_field :poster, accept: 'image/*', class: "btn btn-danger" %>
+    <%= form.label :poster, class: "block font-bold" %>
+    <%= form.file_field :poster, accept: 'image/*', class: "btn btn-danger mt-2 mb-2" %>
   </div>
 
   <div>
-    <%= form.label :movie_type, style: "display: block" %>
-    <%= form.select :movie_type, options_for_select(["Movie", "Webseries"]), class:"inp" %>
+    <%= form.label :movie_type, class: "block font-bold" %>
+    <%= form.select :movie_type, options_for_select(["Movie", "Webseries"]), class: "inp" %>
   </div>
 
-  <h2>Seasons</h2>
+  <h2 class="font-bold mt-4">Seasons</h2>
   <div id="seasons">
     <%= form.fields_for :seasons do |season_form| %>
       <%= render 'season_fields', f: season_form %>
     <% end %>
     <div class="links">
-      <%= link_to_add_association 'Add Season', form, :seasons, class: "btn btn-primary" %>
+      <%= link_to_add_association 'Add Season', form, :seasons, class: "btn btn-primary mt-2 mb-2" %>
     </div>
   </div>
+  
   <div>
-    <%= form.submit "Submit", class:"btn btn-success mt-1"%>
+    <%= form.submit "Submit", class: "btn btn-success mt-1" %>
   </div>
 <% end %>

@@ -1,8 +1,7 @@
 <div class="nested-fields">
-  <%= f.label :episode_no %>
-  <%= f.number_field :episode_no%>
+  <%= f.label :episode_no, class: "block font-bold" %>
+  <%= f.number_field :episode_no, class: "inp" %>
 
-  <%= f.label :episode %>
+  <%= f.label :episode, class: "block font-bold" %>
   <%= f.file_field :episode, accept: "video/*", class: "btn btn-danger mt-2 mb-2" %>
-
 </div>

@@ -1,71 +1,77 @@
-<main class="container mx-auto mt-28 px-5 flex">  
-  <div class="p-4">
-    <p class="font-bold">Name:</p>
-    <p><%= @content.name %></p>
+<main class="container mx-auto mt-28 px-5">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="p-4">
+      <p class="font-bold">Name:</p>
+      <p><%= @content.name %></p>
   
-    <p class="font-bold">Language:</p>
-    <p><%= @content.languages %></p>
+      <p class="font-bold">Language:</p>
+      <p><%= @content.languages %></p>
   
-    <p class="font-bold">Movie type:</p>
-    <p><%= @content.movie_type %></p>
+      <p class="font-bold">Movie type:</p>
+      <p><%= @content.movie_type %></p>
   
-    <p class="font-bold">Available for kids:</p>
-    <p><%= @content.available_for_kids %></p>
+      <p class="font-bold">Available for kids:</p>
+      <p><%= @content.available_for_kids %></p>
   
-    <p class="font-bold">Type of Content:</p>
-    <p><%= @content.type_of_content %></p>
+      <p class="font-bold">Type of Content:</p>
+      <p><%= @content.type_of_content %></p>
   
-    <p class="font-bold">Actor:</p>
-    <p><%= @content.actor %></p>
-    
-    <p class="font-bold">Description:</p>
-    <p><%= @content.description %></p>
+      <p class="font-bold">Actor:</p>
+      <p><%= @content.actor %></p>
+      
+      <p class="font-bold">Description:</p>
+      <p><%= @content.description %></p>
   
-    <p class="font-bold">Director:</p>
-    <p><%= @content.director %></p>
-  </div>
-  
-  <div class="p-4">
-    <% if @content.movie.present? %>
-      <h2 class="font-bold">Movie</h2>
-      <video class="w-full" controls>
-        <source src="<%= url_for(@content.movie) %>" type="video/mp4">
-      </video>
-    <% end %>  
-    <% if @content.trailer.present? %>
-      <h2 class="font-bold">Trailer</h2>
-      <video class="w-full" controls>
-        <source src="<%= url_for(@content.trailer) %>" type="video/mp4">
-      </video>
-    <% end %>
-  </div>
-  <% if @content.seasons.present? %>
-    <% season = @content.seasons %>
-    <% season.where(:season_no => 0).destroy_all %>
-    <% season.sort_by(&:season_no) %>
-    <% @content.seasons.each do |season| %>
-      <div class="p-4">
-        <h2 class="font-bold">Seasons</h2>
-        <p class="font-bold">Season Number:</p>
-        <p><%= season.season_no %></p>
-        <h3 class="font-bold">Episodes</h3>
-        <% episodes = season.episodes %>
-        <% episodes.where(:episode_no => 0).destroy_all %>
-        <% episodes.sort_by(&:episode_no) %>
-        <% episodes.each do |episode| %>
-          <p class="font-bold">Episode Number:</p>
-          <p><%= episode.episode_no %></p>
-          <% if episode.episode.present? %>
-            <video class="w-full" controls>  
-              <source src="<%= url_for(episode.episode) %>" type="video/mp4">
-            </video>
-          <% end %>
+      <p class="font-bold">Director:</p>
+      <p><%= @content.director %></p>
+      
+      <% if @content.movie.present? %>
+        <h2 class="font-bold mt-4">Movie</h2>
+        <video class="w-full" controls>
+          <source src="<%= url_for(@content.movie) %>" type="video/mp4">
+        </video>
+      <% end %>
+      
+      <% if @content.trailer.present? %>
+        <h2 class="font-bold mt-4">Trailer</h2>
+        <video class="w-full" controls>
+          <source src="<%= url_for(@content.trailer) %>" type="video/mp4">
+        </video>
+      <% end %>
+      
+      <% if @content.seasons.present? %>
+        <% season = @content.seasons %>
+        <% season.where(:season_no => 0).destroy_all %>
+        <% season.sort_by(&:season_no) %>
+        <% @content.seasons.each do |season| %>
+          <div class="p-4">
+            <h2 class="font-bold">Seasons</h2>
+            <p class="font-bold">Season Number:</p>
+            <p><%= season.season_no %></p>
+            <h3 class="font-bold mt-2">Episodes</h3>
+            <% episodes = season.episodes %>
+            <% episodes.where(:episode_no => 0).destroy_all %>
+            <% episodes.sort_by(&:episode_no) %>
+            <% episodes.each do |episode| %>
+              <div class="flex items-center mb-4">
+                <p class="font-bold mr-2">Episode Number:</p>
+                <p><%= episode.episode_no %></p>
+              </div>
+              <% if episode.episode.present? %>
+                <video class="w-full" controls>  
+                  <source src="<%= url_for(episode.episode) %>" type="video/mp4">
+                </video>
+              <% end %>
+            <% end %>
+          </div>
         <% end %>
+      <% end %>
+      
+      <div class="flex justify-between mt-4">
+        <%= link_to "Edit this content", edit_content_path(@content), class: "btn btn-blue" %>
+        <%= link_to "Back to contents", contents_path, class: "btn btn-blue" %>
+        <%= button_to "Destroy this content", @content, method: :delete, class: "btn btn-red" %>
       </div>
-    <% end %>
-  <% end %>
-  <%= link_to "Edit this content", edit_content_path(@content), class: "text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" %>
-  <%= link_to "Back to contents", contents_path, class: "text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" %>
-  <%= button_to "Destroy this content", @content, method: :delete, class: "text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" %>
+    </div>
+  </div>
 </main>
-  
