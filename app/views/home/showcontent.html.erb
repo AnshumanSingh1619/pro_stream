@@ -1,0 +1,109 @@
+<%= stylesheet_link_tag "show_content" %>
+<%= link_to 'Back to Home', root_path, class: 'btn btn-outline-primary btn-lg mb-4 bi bi-arrow-left-short text-white mt-8' %>
+<h2 class="text-uppercase"><%= @content.name %></h2>
+<div class="row">
+  <div class="col-lg-10">
+    <div data-controller="video">
+      <% if @content.trailer.present? %>
+        <video id="my-player" width="100%" height="840" controls autoplay muted controlsList="nodownload">
+          <source src="<%= @content.trailer.url %>" type="video/mp4">
+        </video>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-lg-2">
+    <div class="container">
+      <div class="container"> 
+        <% if @content.movie.present? %>
+          <% movie_stop = 0 %>
+          <% if user_signed_in? %>
+            <% unless find_stop_video(@content).present? %>
+              <% create_stop_video(@content) %>
+            <% end %>  
+            <% stop_video = @content.stop_videos.where(semi_user_no: session[:current_semi_user_id]["value"]).first %>
+            <button type="button" class="btn btn-danger btn-lg mb-2 bi bi-play btn-custom" onclick="playVideo('<%= @content.movie.url %>', <%= stop_video.stop_video %>)">Play</button>
+            <% if mylisth.present? %>
+              <%= button_to "Remove from list", remove_from_list_path(@content.id), method: :delete, class: "btn btn-danger btn-lg mb-2", style: "width: 100%" %>
+            <% else %>
+              <%= button_to "Add to list", add_to_list_path(@content.id), method: :post, class: "btn btn-danger btn-lg mb-2", style: "width: 100%" %>
+            <% end %>
+          <% else %>  
+            <button type="button" class="btn btn-danger btn-lg mb-2 bi bi-play btn-custom" onclick="playVideo('<%= @content.movie.url %>', <%= movie_stop %>)">Play</button>
+          <% end %>  
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <%= @content.discription %> 
+    <br>  
+    <% @content.type_of_content.each do |content_type| %>
+      <%= "#{content_type}" %>
+      <br>
+    <% end %>
+    <% @content.language.each do |l| %>
+      <%= "#{l}" %>
+      <br>
+    <% end %>
+    <p>
+      <strong>Actor:</strong>
+      <%= @content.actor %>
+    </p>
+  </div>
+</div>
+
+<% if admin_signed_in? %>
+  <%= link_to "Edit this content", edit_content_path(@content) %> |
+<% end %>
+
+<div class="video-player" id="videoPlayer">
+  <video width="100%" controls controlsList="nodownload" id="myVideo">
+    <source src="" type="video/mp4">
+  </video> 
+  <% if user_signed_in? %>
+    <% stop_video = @content.stop_videos.where(semi_user_no: session[:current_semi_user_id]["value"]).first %>
+    <i class="bi bi-x-lg fs-2 text-white close-btn" onclick="stopVideo('<%= stop_video.id %>')"></i>
+  <% else %>
+    <i class="bi bi-x-lg fs-2 text-white close-btn" onclick="stopVideo()"></i>
+  <% end %>
+<div>
+
+<script>
+  var videoPlayer = document.getElementById("videoPlayer");
+  var myVideo = document.getElementById("myVideo");
+  var trailerVideo = document.getElementById("my-player"); 
+  
+  function stopVideo(stop_video_id) {
+  videoPlayer.style.display = "none";
+  myVideo.pause(); 
+  trailerVideo.pause();
+    if (<%= user_signed_in? %>) {
+      var currentTime = myVideo.currentTime;
+      $.ajax({
+        url: "/update_movie_time",
+        type: "POST",
+        data: {
+          currentTime: currentTime,
+          stop_video_id: stop_video_id
+        },
+        success: function(data) {
+          location.reload();
+        },
+        error: function(data) {}
+      });
+    }
+  }  
+  
+  function playVideo(file, movie_stop) {
+    myVideo.src = file;
+    videoPlayer.style.display = "block";
+    myVideo.play();
+    if (<%= user_signed_in? %>) {
+      myVideo.currentTime = movie_stop;
+    }
+    trailerVideo.pause(); 
+  } 
+</script>
+

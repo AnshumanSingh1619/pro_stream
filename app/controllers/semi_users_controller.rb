@@ -1,6 +1,7 @@
 class SemiUsersController < ApplicationController
   before_action :authenticate
   before_action :set_semi_user, only: %i[ show edit update destroy ]
+  include SemiUsersHelper
 
   def index
     @semi_users = SemiUser.where(user_id: current_user.id)
@@ -45,7 +46,7 @@ class SemiUsersController < ApplicationController
   def destroy 
     @semi_user.destroy!
     respond_to do |format|
-      format.html {}
+      format.html { redirect_to semi_users_path, notice: "Semi user was successfully destroy." }
       format.json { head :no_content }
     end
   end
@@ -60,21 +61,14 @@ class SemiUsersController < ApplicationController
     end
 
     def semi_user_params
-      params.require(:semi_user).permit(:name, :age, :user_id, :profile_pic)
+      params.require(:semi_user).permit(:name, :age, :user_id, :profile_pic, :date_of_birth)
     end
 
     def authenticate 
       if admin_signed_in? 
         redirect_to root_path
       elsif user_signed_in?
-        if current_user.subscription_ends_at > Time.zone.now    
-          if cookies[:current_semi_user_id].present?
-            cookies.delete(:current_semi_user_id)
-          else
-          end   
-        else
-          redirect_to pricing_path
-        end
+        user_authenticate()
       else
         redirect_to new_user_session_path 
       end 

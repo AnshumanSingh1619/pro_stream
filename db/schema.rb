@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_02_163738) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_02_184617) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -82,6 +82,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_163738) do
     t.index ["season_id"], name: "index_episodes_on_season_id"
   end
 
+  create_table "my_lists", force: :cascade do |t|
+    t.bigint "semi_user_id", null: false
+    t.bigint "content_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["content_id"], name: "index_my_lists_on_content_id"
+    t.index ["semi_user_id"], name: "index_my_lists_on_semi_user_id"
+  end
+
   create_table "seasons", force: :cascade do |t|
     t.integer "season_no"
     t.bigint "content_id", null: false
@@ -123,6 +132,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_163738) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "episodes", "seasons"
+  add_foreign_key "my_lists", "contents"
+  add_foreign_key "my_lists", "semi_users"
   add_foreign_key "seasons", "contents"
   add_foreign_key "semi_users", "users"
 end

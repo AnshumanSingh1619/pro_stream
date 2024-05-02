@@ -1,0 +1,135 @@
+<%= stylesheet_link_tag "show_content" %>
+<%= link_to 'Back to Home', root_path, class: 'btn btn-outline-primary btn-lg mb-4 bi bi-arrow-left-short text-white mt-8' %>
+<h2 class="h2 text-uppercase text-danger"><%= @content.name %></h2>
+<div class="col-lg-12">
+  <div class="row">
+    <div class="col-lg-10 position-relative">
+      <% if @content.trailer.present? %>
+        <video id="my-player" width="100%" height="840" controls autoplay muted controlsList="nodownload">
+          <source src="<%= @content.trailer.url %>" type="video/mp4">
+        </video>
+      <% end %>
+    </div>
+    <div class="col-lg-2">
+      <div class="container">
+        <div class="container">
+          <div class="overflow-auto contain mt-4" style="max-height: 875px;">
+            <div class="container mt-3">
+              <div>
+                <%= link_to "Season #{@season.season_no}", root_path, class: "btn btn-outline-primary btn-lg mb-4 bi bi-caret-down text-white",
+                data: { bs_toggle: "modal", bs_target: "#newseasonModal", remote: true} %>
+              </div> 
+              <% if user_signed_in? %>
+                <% if mylisth.present? %>
+                  <%= button_to "Remove from list", remove_from_list_path(@content.id), method: :delete, class: "btn btn-danger btn-lg mb-2 ms-10", style: "width: 100%" %>
+                <% else %>
+                  <%= button_to "Add to list", add_to_list_path(@content.id), method: :post, class: "btn btn-danger btn-lg mb-2 ms-10", style: "width: 100%" %>
+                <% end %>
+              <% end %>  
+              <% episodes = @season.episodes %>
+              <% episodes.sort_by!(&:episode_no) %>
+              <% episodes.each do |episode| %>
+                <div width="100%" height="30px">
+                  <h5 class="h5 mt-3 mb-2 text-white">Season <%= @season.season_no %> Episode <%= episode.episode_no %></h5>
+                </div>
+                <% if user_signed_in? %>
+                  <% unless find_stop_video(episode).present? %>
+                    <% create_stop_video(episode) %>
+                  <% end %>  
+                  <% stop_video = episode.stop_videos.where(semi_user_no: session[:current_semi_user_id]["value"]).first %>
+                  <button type="button" class="btn btn-danger btn-lg mb-2 bi bi-play btn-custom" onclick="playVideo('<%= episode.episode.url %>', '<%= stop_video.stop_video %>', '<%= episode.id %>')">Play</button>
+                <% else %>
+                  <% movie_stop = 0 %>
+                  <button type="button" class="btn btn-danger btn-lg mb-2 bi bi-play btn-custom" onclick="playVideo('<%= @content.movie.url %>', '<%= movie_stop %>')">Play</button>
+                <% end %>
+                <div class="video-player" id="videoPlayer<%= episode.id %>">
+                  <video width="100%" controls controlsList="nodownload" id="myVideo<%= episode.id %>">
+                    <source src="" type="video/mp4">
+                  </video> 
+                  <% if user_signed_in? %>
+                    <i class="bi bi-x-lg fs-2 text-white close-btn" onclick="stopVideo('<%= stop_video.id %>', '<%= episode.id %>', '<%= @season.id %>', '<%= @content.id %>')"></i>
+                  <% else %>
+                    <i class="bi bi-x-lg fs-2 text-white close-btn" onclick="stopVideo()"></i>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>  
+      </div>  
+    </div>
+  </div>
+  <%= @content.discription %> 
+  <br>
+  <% @content.type_of_content.each do |content_type| %>
+    <%= "#{content_type}" %>
+    <br>
+  <% end %>
+  <% @content.language.each do |l| %>
+    <%= "#{l}" %>
+    <br>
+  <% end %>
+  <p>
+    <strong>Actor:</strong>
+    <%= @content.actor %>
+  </p>
+</div>
+
+<% if admin_signed_in? %>
+  <%= link_to "Edit this content", edit_content_path(@content) %> 
+<% end %>  
+
+<div class="modal fade" id="newseasonModal" tabindex="-1" aria-labelledby="newseasonModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-body bg-primary">
+        <% @content.seasons.each do |season| %>
+          <%= link_to "Season #{season.season_no}", showseason_path(@content.id, season.id),  class: "btn btn-transparent btn-custom " %>
+          <br>
+        <% end %>
+      </div>  
+    </div>
+  </div>
+</div>
+
+<script>
+  var trailerVideo = document.getElementById("my-player");
+
+  function stopVideo(stop_video_id, episode_id, season_id, content_id) {
+    var myVideo = document.getElementById("myVideo" + episode_id);
+    var videoPlayer = document.getElementById("videoPlayer" + episode_id);
+    videoPlayer.style.display = "none";
+    myVideo.pause();
+    trailerVideo.pause();
+    if (<%= user_signed_in? %>) {
+      var currentTime = myVideo.currentTime;
+      $.ajax({
+        url: "/update_episode_time",
+        type: "POST",
+        data: {
+          currentTime: currentTime,
+          stop_video_id: stop_video_id,
+          episode_id: episode_id,
+          season_id: season_id,
+          content_id: content_id
+        },
+        success: function(data) {
+          location.reload();
+        },
+        error: function(data) {}
+      });
+    }
+  }
+
+  function playVideo(file, movie_stop, episode_id) {
+    var myVideo = document.getElementById("myVideo" + episode_id);
+    var videoPlayer = document.getElementById("videoPlayer" + episode_id);
+    myVideo.src = file;
+    videoPlayer.style.display = "block";
+    myVideo.play();
+    if (<%= user_signed_in? %>) {
+      myVideo.currentTime = movie_stop;
+    }
+    trailerVideo.pause();
+  }
+</script>
