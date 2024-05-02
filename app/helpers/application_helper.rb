@@ -1,13 +1,9 @@
 module ApplicationHelper
   def user_authenticate
-    if current_user.subscription_ends_at > Time.zone.now
-      if session[:current_semi_user_id].present?
-        current_semi_user()
-      else
-        redirect_to semi_users_path
-      end
+    if session[:current_semi_user_id].present?
+      current_semi_user()
     else
-      redirect_to pricing_path
+      redirect_to semi_users_path
     end
   end
 
