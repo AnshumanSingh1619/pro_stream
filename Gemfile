@@ -67,3 +67,5 @@ group :test do
 end
 
 gem "tailwindcss-rails", "~> 2.5"
+
+gem "render_build_setup", "~> 0.0.1"
