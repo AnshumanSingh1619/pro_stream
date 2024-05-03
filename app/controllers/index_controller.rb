@@ -14,8 +14,7 @@ class IndexController < ApplicationController
   def searchindex
     parameter = params[:search_term]
     if parameter.present?
-      sanitized_parameter = Regexp.escape(parameter)
-      @contents = @mcontents.where(name: /.*#{sanitized_parameter}.*/i)
+      @contents = @mcontents.where("name ILIKE ?", "%#{parameter}%")
     else
       @contents = []
     end
@@ -23,7 +22,8 @@ class IndexController < ApplicationController
       format.turbo_stream do
         render turbo_stream: turbo_stream.update('search_results', partial: "shared/index")
       end
-    end
+      format.html {}
+    end    
   end
   
   def categorised

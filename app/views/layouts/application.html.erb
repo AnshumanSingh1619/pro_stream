@@ -9,10 +9,12 @@
     <%= javascript_include_tag "jquery" %>
     <%= javascript_include_tag 'cocoon' %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <%= render 'shared/header' %>
+    <main class="container mx-auto mt-8 px-1 ">
       <%= yield %>
     </main>
   </body>

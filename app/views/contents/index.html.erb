@@ -14,7 +14,6 @@
         <div class="px-6 py-4">
           <div class="font-bold text-xl mb-2"><%= content.name %></div>
           <p class="text-gray-700 text-base">
-            <%= content.description %> <br>
             <% content.type_of_content.each do |content_type| %>
               <%= "#{content_type}" %><br>
             <% end %>
