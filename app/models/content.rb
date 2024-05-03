@@ -26,3 +26,4 @@ class Content < ApplicationRecord
     end
   end
 end
+
