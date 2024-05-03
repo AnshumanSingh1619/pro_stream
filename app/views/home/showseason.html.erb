@@ -53,7 +53,7 @@
                 <%= link_to "Season #{@season.season_no}", root_path, class: "btn btn-outline-dark btn-lg mb-2 bi bi-caret-down",
                 data: { bs_toggle: "modal", bs_target: "#newseasonModal", remote: true} %>
               </div> 
-              <% if @mylist.present? %>
+              <% if mylisth.present? %>
                 <%= button_to "Remove from list", remove_from_list_path(@content.id), method: :delete, class: "btn btn-danger btn-lg mb-2 ms-10", style: "width: 100%" %>
               <% else %>
                 <%= button_to "Add to list", add_to_list_path(@content.id), method: :post, class: "btn btn-danger btn-lg mb-2 ms-10", style: "width: 100%" %>

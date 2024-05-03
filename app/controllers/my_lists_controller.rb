@@ -4,8 +4,8 @@ class MyListsController < ApplicationController
 
   def index
     my_lists = MyList.where(semi_user_id: session[:current_semi_user_id]["value"])
-    @my_lists = my_lists.order_by(id: -1)
-  end
+    @my_lists = my_lists.order(id: :desc)
+  end  
   
   def create 
     mylist = MyList.new(
@@ -44,12 +44,8 @@ class MyListsController < ApplicationController
     if admin_signed_in? 
       redirect_to root_path
     elsif user_signed_in?
-      if current_user.subscription_ends_at > Time.zone.now
-        unless session[:current_semi_user_id]["value"].present?
-          redirect_to semi_users_path
-        end
-      else
-        redirect_to pricing_path
+      unless session[:current_semi_user_id].present?
+        redirect_to semi_users_path
       end
     else
       redirect_to new_user_session_path 

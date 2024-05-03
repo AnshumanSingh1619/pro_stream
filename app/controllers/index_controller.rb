@@ -28,7 +28,7 @@ class IndexController < ApplicationController
   def categorised
     parameter = params[:search_term2]
     column_name = params[:column_name]
-    @contents = @mcontents.where("#{column_name}": /.*(#{parameter})+.*/i)
+    @contents = @mcontents.where("ARRAY[?]::varchar[] <@ #{column_name} AND ? ILIKE ANY (#{column_name}::varchar[])", parameter, parameter)
   end
 
   private
