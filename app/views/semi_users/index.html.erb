@@ -1,14 +1,25 @@
-<div class="w-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-  <% end %>
-
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Semi users</h1>
-    <%= link_to "New semi user", new_semi_user_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+<%= stylesheet_link_tag "semi_user_index" %>
+<%= render 'shared/header' %>
+<div class="col-lg-12 container borde">
+  <%= link_to "Add profile", new_semi_user_path, class: "btn btn-danger btn-lg mb-2 shadow",
+  data: { bs_toggle: 'modal', bs_target: '#newUserModal', remote: true } %>
+  <div class="row justify-content-center borde"> 
+    <% @semi_users.each do |semi_user| %>
+      <%= render "semi_user", semi_user: semi_user %>
+    <% end %>
   </div>
+</div>
 
-  <div id="semi_users" class="min-w-full">
-    <%= render @semi_users %>
+<div class="modal fade" id="newUserModal" tabindex="-1" aria-labelledby="newUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="newUserModalLabel">Create New User</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id="newuserForm">
+        <%= render "form" %>
+      </div>
+    </div>
   </div>
 </div>

@@ -101,24 +101,6 @@
     videoPlayer.style.display = "none";
     myVideo.pause();
     trailerVideo.pause();
-    if (<%= user_signed_in? %>) {
-      var currentTime = myVideo.currentTime;
-      $.ajax({
-        url: "/update_episode_time",
-        type: "POST",
-        data: {
-          currentTime: currentTime,
-          stop_video_id: stop_video_id,
-          episode_id: episode_id,
-          season_id: season_id,
-          content_id: content_id
-        },
-        success: function(data) {
-          location.reload();
-        },
-        error: function(data) {}
-      });
-    }
   }
 
   function playVideo(file, movie_stop, episode_id) {
@@ -127,9 +109,6 @@
     myVideo.src = file;
     videoPlayer.style.display = "block";
     myVideo.play();
-    if (<%= user_signed_in? %>) {
-      myVideo.currentTime = movie_stop;
-    }
     trailerVideo.pause();
   }
 </script>
