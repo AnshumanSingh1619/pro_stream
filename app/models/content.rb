@@ -6,8 +6,6 @@ class Content < ApplicationRecord
   has_one_attached :poster
 
   validates_presence_of :trailer, :poster, :movie_type, :available_for_kids, :director, :description, :actor, :name
-  validates_inclusion_of :available_for_kids, in: ["for 18+ only", "Available for all"]
-  validates_inclusion_of :movie_type, in: ["Movie", "Webseries"]
   validate :validate_movie_type
 
   private
