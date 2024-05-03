@@ -1,6 +1,5 @@
 class IndexController < ApplicationController
   before_action :authenticate
-  skip_before_action :verify_authenticity_token, only: [:update_movie_time]
   include ApplicationHelper
 
   def showmovie
@@ -30,12 +29,6 @@ class IndexController < ApplicationController
     parameter = params[:search_term2]
     column_name = params[:column_name]
     @contents = @mcontents.where("#{column_name}": /.*(#{parameter})+.*/i)
-  end
-
-  def update_movie_time
-    stop_videos = StopVideo.find(params[:stop_video_id])
-    stop_videos.stop_video = params[:currentTime]
-    stop_videos.save
   end
 
   private

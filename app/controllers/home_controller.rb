@@ -1,9 +1,8 @@
 class HomeController < ApplicationController
   before_action :authenticate
-  skip_before_action :verify_authenticity_token, only: [:update_episode_time]
-  before_action :set_content, only: [:showcontent, :showseason, :seasondestroy, :episodedestroy, :update_episode_time]
-  before_action :set_season, only: [:showseason, :seasondestroy, :episodedestroy, :update_episode_time]
-  before_action :set_episode, only: [:episodedestroy, :update_episode_time]
+  before_action :set_content, only: [:showcontent, :showseason, :seasondestroy, :episodedestroy]
+  before_action :set_season, only: [:showseason, :seasondestroy, :episodedestroy,]
+  before_action :set_episode, only: [:episodedestroy,]
   include ApplicationHelper
 
   def index
@@ -11,22 +10,9 @@ class HomeController < ApplicationController
   end
   
   def showcontent
-    @content.inc(trailer_view_count: 1)
-    @content.save
   end
 
   def showseason
-    @content.inc(trailer_view_count: 1)
-    @content.save
-  end
-
-  def update_episode_time
-    stop_videos = StopVideo.find(params[:stop_video_id])
-    stop_videos.update(
-      stoppable: @episode,
-      semi_user_id: session[:current_semi_user_id]["value"],
-      stop_video: params[:currentTime]
-    )
   end
 
   def seasondestroy

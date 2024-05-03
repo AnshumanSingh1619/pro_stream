@@ -8,5 +8,15 @@ class Admin < ApplicationRecord
 
   def jwt_payload
     super
-  end            
+  end     
+  before_validation :calculate_age
+
+  private
+
+  def calculate_age
+    if date_of_birth.present?
+      now = Time.zone.now.to_date
+      self.age = now.year - date_of_birth.year
+    end
+  end
 end

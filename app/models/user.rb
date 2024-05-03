@@ -9,7 +9,14 @@ class User < ApplicationRecord
   def jwt_payload
     super
   end       
-  
-  validates :firstname, :lastname, :age, :gender, presence: true       
-  has_many :semi_user, dependent: :destroy
+  before_validation :calculate_age
+  validates :firstname, :lastname, :date_of_birth, :gender, presence: true
+  has_many :semi_users, dependent: :destroy
+
+  private
+
+  def calculate_age
+    now = Time.zone.now.to_date
+    self.age = now.year - date_of_birth.year
+  end
 end

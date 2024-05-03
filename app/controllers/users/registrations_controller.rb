@@ -15,12 +15,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
     semi_user = SemiUser.new(
       name: @user.firstname,
       age: @user.age,
+      date_of_birth: @user.date_of_birth,
       user_id: @user.id
     )
     semi_user.save
+    now = Time.zone.now.to_date
     semi_user1 = SemiUser.new(
       name: "child",
       age: 10,
+      date_of_birth: (now - 10.years).to_date,
       user_id: @user.id
     )
     semi_user1.save
