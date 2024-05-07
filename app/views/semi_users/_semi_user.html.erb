@@ -1,35 +1,27 @@
-<div class="col-lg-4 bg-transparent mt-5 border" >
-  <div class="profile Regular shadow mt-5 p-5">
-    <div class="dropdown">
-      <a class="icon1" href="#" role="icon" data-toggle="dropdown" aria-expanded="false">
-        <i class="bi bi-three-dots-vertical"></i>  
-      </a>
-      <ul class="dropdown-menu bg-dark">
-        <li><a class="dropdown-item"><%= link_to 'Edit', edit_semi_user_path(semi_user), class: 'nav-link active btn btn-custom AddBook',
-        data: { toggle: 'modal', target: "#edituserModal#{semi_user.id}", remote: true } %></a></li>
-        <li><a class="dropdown-item"><%= button_to 'Delete', semi_user, method: :delete, class: 'nav-link active btn btn-custom' %></a></li>
-      </ul>
-    </div>  
-    <div class="modal" id="edituserModal<%= semi_user.id %>" tabindex="-1" aria-labelledby="edituserModalLabel<%= semi_user.id %>" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content text-dark">
-          <div class="modal-header">
-            <h1 class="text-lg font-bold" id="edituserModalLabel<%= semi_user.id %>">Edit User</h1> 
-            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div id="edituserForm">
-            <%= render "edit_form", semi_user: semi_user %>
-          </div>
-        </div>
-      </div>
-    </div>
-    <%= link_to session_create_path(semi_user.id) do %>
-        <% if semi_user.profile_pic.present? %>
-        <img src="<%= url_for(semi_user.profile_pic) %>" style="width: 100%; height: 100%;" />
-      <% else %>
-        <img src="https://i.stack.imgur.com/l60Hf.png" style="width: 100%; height: 100%;" />  
-      <% end %>
-    <% end %>  
-    <h2><%= semi_user.name %></h2>
-  </div>
+<div id="<%= dom_id semi_user %>">
+  <p>
+    <strong>Name:</strong>
+    <%= semi_user.name %>
+  </p>
+
+  <p>
+    <strong>Age:</strong>
+    <%= semi_user.age %>
+  </p>
+
+  <p>
+    <strong>User:</strong>
+    <%= semi_user.user_id %>
+  </p>
+
+  <p>
+    <strong>Profile pic:</strong>
+    <%= semi_user.profile_pic %>
+  </p>
+
+  <p>
+    <strong>Date of birth:</strong>
+    <%= semi_user.date_of_birth %>
+  </p>
+
 </div>

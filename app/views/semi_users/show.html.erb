@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @semi_user %>
+
+<div>
+  <%= link_to "Edit this semi user", edit_semi_user_path(@semi_user) %> |
+  <%= link_to "Back to semi users", semi_users_path %>
+
+  <%= button_to "Destroy this semi user", @semi_user, method: :delete %>
+</div>
