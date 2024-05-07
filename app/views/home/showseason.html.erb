@@ -72,20 +72,6 @@
       </div>  
     </div>
   </div>
-  <%= @content.description %> 
-  <br>
-  <% @content.type_of_content.each do |content_type| %>
-    <%= "#{content_type}" %>
-    <br>
-  <% end %>
-  <% @content.languages.each do |l| %>
-    <%= "#{l}" %>
-    <br>
-  <% end %>
-  <p>
-    <strong>Actor:</strong>
-    <%= @content.actor %>
-  </p>
 </div>
 
 <div class="video-player" id="videoPlayer">
