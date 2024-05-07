@@ -31,6 +31,7 @@
     color: White !important;
   }
 </style>
+
 <nav class="bg-white border-gray-200 dark:bg-gray-900">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <a href="" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -47,29 +48,35 @@
           <div class="result-box"></div>
         </div>
       <% end %>    
-      <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false">
+      <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
         <span class="sr-only">Open user menu</span>
-        <img class="w-8 h-8 rounded-full" src="https://yt3.googleusercontent.com/5QV7Ysgi_rkahVBwPFYVadsPIKwS51rF465fkUdQXX6_lp91cEqEZaL5uxn7dYjtPeI27HEF5b0=s900-c-k-c0x00ffffff-no-rj" alt="user photo">
+        <img class="w-8 h-8 rounded-full" src="https://static.vecteezy.com/system/resources/thumbnails/002/002/403/small/man-with-beard-avatar-character-isolated-icon-free-vector.jpg" alt="user photo">
       </button>
       <!-- Dropdown menu -->
       <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
-        <div class="px-4 py-3">
-          <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-          <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
-        </div>
         <ul class="py-2" aria-labelledby="user-menu-button">
-          <li>
-            <%= link_to 'Home' , root_path, class:'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white' %>
-          </li>
-          <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
-          </li>
-          <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
-          </li>
-          <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
-          </li>
+          <% if admin_signed_in? %>
+            <li>
+              <%= button_to "Sign Out", destroy_admin_session_path, method: :delete, class:'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white' %>
+            </li>
+            <li>
+              <%= link_to "Edit", edit_admin_registration_path, class:'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white' %>
+            </li>
+          <% elsif user_signed_in? %>
+            <li>
+              <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class:'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white' %>
+            </li>
+            <li>
+              <%= button_to "Change_profile", session_destroy_path, method: :delete, class:'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white' %>
+            </li>
+            <li>
+              <%= link_to "Edit", edit_user_registration_path, class:'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white' %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to "Sign In", new_user_session_path, class:'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white' %>
+            </li>
+          <% end %> 
         </ul>
       </div>
       <button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-user" aria-expanded="false">
@@ -115,22 +122,6 @@
               <a href="<%= custom_content_path("Dramas", "type_of_content") %>">Dramas</a>
             </div>
           </div>
-        </li>
-      <% end %> 
-      <% if admin_signed_in? %>
-        <li>
-          <%= button_to "Sign Out", destroy_admin_session_path, method: :delete, class:'block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500' %>
-        </li>
-      <% elsif user_signed_in? %>
-        <li>
-          <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class:'block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500' %>
-        </li>
-        <li>
-          <%= button_to "Change_profile", session_destroy_path, method: :delete, class:'block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500' %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to "Sign In", new_user_session_path, class:'block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500' %>
         </li>
       <% end %> 
       </ul>
