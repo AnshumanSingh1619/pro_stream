@@ -40,7 +40,7 @@
   }
 </style>
 <div class="container">
-  <%= link_to "Add profile", new_semi_user_path, class: "btn btn-danger btn-lg mb-2 shadow",
+  <%= link_to "Add profile", new_semi_user_path, class: "text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900",
   data: { toggle: 'modal', target: '#newUserModal', remote: true } %>
   <div class="grid grid-cols-3 gap-4 justify-items-center"> 
     <% @semi_users.each do |semi_user| %>
