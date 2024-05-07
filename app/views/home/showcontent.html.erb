@@ -1,67 +1,56 @@
 <style>
-.modal-backdrop {
-  background-color: blue; 
-}
-
-.contain {
-  margin: auto;
-  top: 100%;
-  width: 100%;
-  color: black;
-  border-radius: 5px;
-  box-shadow: 0px 0px 2px 2px red;
-}
-
-.video-player {
-  width: 90%;
-  position: absolute;
-  left: 50%;
-  bottom: 10px;
-  transform: translateX(-50%);
-  display: none;
-}
-
-.video:focus {
-  outline: none;
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
+  .modal-backdrop {
+    background-color: blue; 
+  }
+  
+  .contain {
+    margin: auto;
+    top: 100%;
+    width: 100%;
+    color: black;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px 2px red;
+  }
+  
+  .video-player {
+    width: 90%;
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%);
+    display: none;
+  }
+  
+  .video:focus {
+    outline: none;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
 </style>
 
 <h2><%= @content.name %></h2>
-<div class="col-lg-12">
-  <div class="row">
-    <div class="col-lg-10">
-      <% if @content.trailer.present? %>
-        <video id="my-player" width="100%" height="840" controls autoplay muted controlsList="nodownload">
-          <source src="<%= url_for(@content.trailer) %>" type="video/mp4">
-        </video>
+<div class="">
+  <% if @content.trailer.present? %>
+    <video id="my-player" width="80%" height="840" controls autoplay muted controlsList="nodownload">
+      <source src="<%= url_for(@content.trailer) %>" type="video/mp4">
+    </video>
+  <% end %>    
+  <% if @content.movie.present? %>
+    <button type="button" class="btn btn-danger btn-lg mb-2 bi bi-play btn-custom" onclick="playVideo('<%= url_for(@content.movie) %>')">Play</button>
+    <% if user_signed_in? %>
+      <% if mylisth.present? %>
+        <%= button_to "Remove from list", remove_from_list_path(@content.id), method: :delete, class: "btn btn-danger btn-lg mb-2 ms-10" %>
+      <% else %>
+        <%= button_to "Add to list", add_to_list_path(@content.id), method: :post, class: "btn btn-danger btn-lg mb-2 ms-10" %>
       <% end %>
-    </div>
-    
-    <div class="col-lg-2">
-      <div class="container">
-        <div class="container">
-          <% if @content.movie.present? %>
-            <button type="button" class="btn btn-danger btn-lg mb-2 bi bi-play btn-custom" onclick="playVideo('<%= url_for(@content.movie) %>')">Play</button>
-            <% if user_signed_in? %>
-              <% if mylisth.present? %>
-                <%= button_to "Remove from list", remove_from_list_path(@content.id), method: :delete, class: "btn btn-danger btn-lg mb-2 ms-10", style: "width: 100%" %>
-              <% else %>
-                <%= button_to "Add to list", add_to_list_path(@content.id), method: :post, class: "btn btn-danger btn-lg mb-2 ms-10", style: "width: 100%" %>
-              <% end %>
-            <% end %>  
-          <% end %>
-        </div>  
-      </div>
-    </div>
-  </div>
-  <div>
+    <% end %>  
+  <% end %>
+<div>
     <%= @content.description %> 
     <br>
     <% @content.type_of_content.each do |content_type| %>
