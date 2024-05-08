@@ -6,7 +6,9 @@
           <% season = content.seasons.find_by(season_no: 1) %>
           <%= link_to showseason_path(content.id, season.id) do %>
             <div class="relative group">
-              <%= image_tag content.poster %>
+              <div class="h-72">
+                <img class="content-img object-cover w-full h-full" src="<%= url_for(content.poster) %>" />
+              </div>
               <div class="absolute inset-0 flex justify-center items-center bg-gray-800 bg-opacity-0 group-hover:bg-opacity-75 transition duration-300 opacity-0 group-hover:opacity-100">
                 <h3 class="text-white text-xl font-semibold uppercase text-center"><%= content.name %></h3>
               </div>
@@ -15,7 +17,9 @@
         <% else %>
           <%= link_to showcontent_path(content.id) do %>
             <div class="relative group">
-              <%= image_tag content.poster %>
+              <div class="h-72">
+                <img class="content-img object-cover w-full h-full" src="<%= url_for(content.poster) %>" />
+              </div>
               <div class="absolute inset-0 flex justify-center items-center bg-gray-800 bg-opacity-0 group-hover:bg-opacity-75 transition duration-300 opacity-0 group-hover:opacity-100">
                 <h3 class="text-white text-xl font-semibold uppercase text-center"><%= content.name %></h3>
               </div>
