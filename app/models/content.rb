@@ -1,9 +1,9 @@
 class Content < ApplicationRecord
   has_many :seasons, dependent: :destroy, inverse_of: :content
   accepts_nested_attributes_for :seasons, allow_destroy: true, reject_if: :all_blank
-  has_one_attached :trailer
-  has_one_attached :movie
-  has_one_attached :poster
+  mount_uploader :trailer, VideoUploader
+  mount_uploader :movie, VideoUploader
+  mount_uploader :poster, VideoUploader
 
   validates_presence_of :trailer, :poster, :movie_type, :available_for_kids, :director, :description, :actor, :name
   validate :validate_movie_type

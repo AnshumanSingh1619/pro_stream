@@ -1,6 +1,6 @@
 class SemiUser < ApplicationRecord
   belongs_to :user
-  has_one_attached :profile_pic
+  mount_uploader :profile_pic, VideoUploader
   validates :name, :date_of_birth, presence: true
   before_validation :calculate_age
 

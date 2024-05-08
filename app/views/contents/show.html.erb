@@ -28,14 +28,14 @@
       <% if @content.movie.present? %>
         <h2 class="font-bold mt-4">Movie</h2>
         <video class="w-full" controls>
-          <source src="<%= url_for(@content.movie) %>" type="video/mp4">
+          <source src="<%= @content.movie %>" type="video/mp4">
         </video>
       <% end %>
       
       <% if @content.trailer.present? %>
         <h2 class="font-bold mt-4">Trailer</h2>
         <video class="w-full" controls>
-          <source src="<%= url_for(@content.trailer) %>" type="video/mp4">
+          <source src="<%= @content.trailer %>" type="video/mp4">
         </video>
       <% end %>
       
