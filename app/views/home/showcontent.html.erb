@@ -37,11 +37,11 @@
 <div class="">
   <% if @content.trailer.present? %>
     <video id="my-player" width="80%" height="840" controls autoplay muted controlsList="nodownload">
-      <source src="<%= url_for(@content.trailer) %>" type="video/mp4">
+      <source src="<%= @content.trailer %>" type="video/mp4">
     </video>
   <% end %>    
   <% if @content.movie.present? %>
-    <button type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" onclick="playVideo('<%= url_for(@content.movie) %>')">Play</button>
+    <button type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" onclick="playVideo('<%= @content.movie %>')">Play</button>
     <% if user_signed_in? %>
       <% if mylisth.present? %>
         <%= button_to "Remove from list", remove_from_list_path(@content.id), method: :delete, class: "text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" %>

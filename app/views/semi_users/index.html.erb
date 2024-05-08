@@ -57,7 +57,7 @@
           </div>  
           <%= link_to session_create_path(semi_user.id) do %>
               <% if semi_user.profile_pic.present? %>
-              <img src="<%= url_for(semi_user.profile_pic) %>" class="w-full h-full object-cover rounded-lg" />
+              <img src="<%=  semi_user.profile_pic %>" class="w-full h-full object-cover rounded-lg" />
             <% else %>
               <img src="https://i.stack.imgur.com/l60Hf.png" class="w-full h-full object-cover rounded-lg" />  
             <% end %>

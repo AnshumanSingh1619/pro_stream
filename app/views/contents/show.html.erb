@@ -59,7 +59,7 @@
               </div>
               <% if episode.episode.present? %>
                 <video class="w-full" controls>  
-                  <source src="<%= url_for(episode.episode) %>" type="video/mp4">
+                  <source src="<%= episode.episode %>" type="video/mp4">
                 </video>
               <% end %>
             <% end %>
