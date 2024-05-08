@@ -4,7 +4,9 @@ module MyListsHelper
   end
 
   def mylisth
-    MyList.where(content_id: @content.id, semi_user_id: session[:current_semi_user_id]["value"])
+    if session[:current_semi_user_id].present?
+      MyList.where(content_id: @content.id, semi_user_id: session[:current_semi_user_id]["value"])
+    end
   end
   
 end
