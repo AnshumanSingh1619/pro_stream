@@ -7,10 +7,8 @@
     <%= f.fields_for :episodes do |episode_form| %>
       <%= render 'episode_fields', f: episode_form %>
     <% end %>
-    <div class="links">
-      <%= link_to_add_association 'Add Episode', f, :episodes, class: "btn btn-secondary mt-2 mb-2" %>
-    </div>
+    <div class="links mt-2" style="padding-bottom: 20px;">
+      <%= link_to_add_association 'Add Episode', f, :episodes, class: "text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" %>
+    </div>   
   </div>
-  
-  <%= link_to_remove_association "Delete", f, class: "btn btn-danger mt-2 mb-2" %>
 </div>
