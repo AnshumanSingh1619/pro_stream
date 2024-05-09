@@ -1,0 +1,35 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(42, 41, 41);
+}
+.icon1 {
+  font-size: 25px;
+  position: absolute;
+  margin-left: 260px;
+  border-radius: 5%;
+}
+.profile {
+  height: 300px;
+  width: 300px;
+  margin: auto; 
+}
+.borde {
+  border-radius: 20px; 
+}
+.profile img {
+  border-radius: 20px; 
+  box-shadow: 0px 0px 4px 2px blue;
+}
+h2{
+  color:red;
+  text-align: center;
+}
+.inp{
+  width: 100%;
+  height: auto;
+  margin:5px;
+  font-size:20px;
+}
+.modal-backdrop {
+ background-color: red;
+}
