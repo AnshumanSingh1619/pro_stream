@@ -78,4 +78,4 @@ gem 'devise-jwt'
 gem 'cocoon'
 gem 'jquery-rails'
 
-gem 'carrierwave', '~> 3.0'
+gem "aws-sdk-s3", require: false

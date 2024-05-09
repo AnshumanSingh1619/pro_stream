@@ -7,7 +7,7 @@
         <% if content.poster.present? %>
           <div style="height: 200px;">
             <%= link_to content_path(content) do %>
-              <img src="<%= content.poster %>" class="w-full h-full object-cover" />
+              <img src="<%= url_for(content.poster) %>" class="w-full h-full object-cover" />
             <% end %>
           </div>
         <% end %>

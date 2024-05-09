@@ -1,6 +1,6 @@
 class Episode < ApplicationRecord
   belongs_to :season
-  mount_uploader :episode, VideoUploader
+  has_one_attached :episode
 
   validates :episode_no, presence: true
 end
