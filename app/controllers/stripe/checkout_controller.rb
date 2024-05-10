@@ -1,11 +1,11 @@
 class Stripe::CheckoutController < ApplicationController
   def pricing
-    lookup_keys = %w[monthly quarterly halfyearly yearly]
+    lookup_keys = %w[month three_month six_months one_year]
     @prices = Stripe::Price.list(lookup_keys: lookup_keys, active: true, expand: ['data.product']).data.sort_by(&:unit_amount) 
-    @monthly_price = @prices.find { |price| price.lookup_key == 'monthly' }
-    @quarterly_price = @prices.find { |price| price.lookup_key == 'quarterly' }
-    @halfyearly_price = @prices.find { |price| price.lookup_key == 'halfyearly' }
-    @yearly_price = @prices.find { |price| price.lookup_key == 'yearly' } 
+    @monthly_price = @prices.find { |price| price.lookup_key == 'month' }
+    @quarterly_price = @prices.find { |price| price.lookup_key == 'three_month' }
+    @halfyearly_price = @prices.find { |price| price.lookup_key == 'six_months' }
+    @yearly_price = @prices.find { |price| price.lookup_key == 'one_year' } 
   end
 
   def checkout
