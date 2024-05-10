@@ -47,6 +47,7 @@ gem "image_processing", "~> 1.2"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
+  gem "dotenv-rails"
 end
 
 group :development do
@@ -78,4 +79,8 @@ gem 'devise-jwt'
 gem 'cocoon'
 gem 'jquery-rails'
 
+#to create payment gateway
+gem "stripe", "~> 11.0"
+
+# to add active storage on amazon web server
 gem "aws-sdk-s3", require: false

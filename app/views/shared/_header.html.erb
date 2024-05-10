@@ -72,6 +72,9 @@
             <li>
               <%= link_to "Edit", edit_user_registration_path, class:'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white' %>
             </li>
+            <li>
+              <%= button_to "Billing Portal", stripe_billing_portal_path, data: { turbo: 'false' }, class:'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white' %>
+            </li>
           <% else %>
             <li>
               <%= link_to "Sign In", new_user_session_path, class:'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white' %>

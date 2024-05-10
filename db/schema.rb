@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_09_142548) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_10_073351) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -124,6 +124,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_142548) do
     t.string "jti", null: false
     t.date "date_of_birth"
     t.string "devise_type"
+    t.string "stripe_customer_id"
+    t.string "subscription_status"
+    t.datetime "subscription_ends_at"
+    t.string "plan"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["jti"], name: "index_users_on_jti", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

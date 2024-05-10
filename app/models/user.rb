@@ -13,6 +13,14 @@ class User < ApplicationRecord
   validates :firstname, :lastname, :date_of_birth, :gender, presence: true
   has_many :semi_users, dependent: :destroy
 
+  after_create do 
+    stripe_customer = Stripe::Customer.create(
+      email: email,
+      name: "#{firstname} #{lastname}"
+      )
+    update(subscription_ends_at: Time.now - 1.day)
+  end     
+
   private
 
   def calculate_age
