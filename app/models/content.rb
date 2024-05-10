@@ -1,5 +1,6 @@
 class Content < ApplicationRecord
   has_many :seasons, dependent: :destroy, inverse_of: :content
+  has_many :my_lists, dependent: :destroy
   accepts_nested_attributes_for :seasons, allow_destroy: true, reject_if: :all_blank
   has_one_attached :trailer
   has_one_attached :movie

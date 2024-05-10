@@ -18,7 +18,7 @@ class User < ApplicationRecord
       email: email,
       name: "#{firstname} #{lastname}"
       )
-    update(subscription_ends_at: Time.now - 1.day)
+    update(subscription_ends_at: Time.now - 1.day, stripe_customer_id: stripe_customer.id)
   end     
 
   private

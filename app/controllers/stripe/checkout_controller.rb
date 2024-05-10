@@ -23,6 +23,15 @@ class Stripe::CheckoutController < ApplicationController
   end
 
   def success
+    customer = Stripe::Customer.retrieve("#{current_user.stripe_customer_id}")
+    subscriptions = Stripe::Subscription.list({ customer: customer.id })
+    user = current_user
+    user.update(
+      plan: subscriptions.data.first.items.data[0].price.lookup_key,
+      subscription_status: subscriptions.data.first.status,
+      subscription_ends_at: Time.at(subscriptions.data.first.current_period_end).to_datetime
+    )
+    user.save
     flash[:notice] = 'success'
     redirect_to root_path
   end
