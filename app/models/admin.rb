@@ -9,7 +9,7 @@ class Admin < ApplicationRecord
   def jwt_payload
     super
   end     
-  before_validation :calculate_age
+  before_create :calculate_age
 
   private
 

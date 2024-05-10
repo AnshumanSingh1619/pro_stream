@@ -9,7 +9,7 @@ class User < ApplicationRecord
   def jwt_payload
     super
   end       
-  before_validation :calculate_age
+  before_create :calculate_age
   validates :firstname, :lastname, :date_of_birth, :gender, presence: true
   has_many :semi_users, dependent: :destroy
 

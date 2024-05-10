@@ -9,9 +9,17 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    user = User.find_by(email: params[:user][:email])
+    if user.present?
+      super
+    else
+      respond_to do |format|
+        format.html { redirect_to new_user_session_path, notice: "Email you entered is wrong" }
+      end
+    end
+  end
+
 
   # DELETE /resource/sign_out
   # def destroy

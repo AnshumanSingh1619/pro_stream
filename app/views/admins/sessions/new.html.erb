@@ -25,10 +25,13 @@
     font-size:20px;
   }
 </style>
-
 <div class="conta">
-<h2>Log in</h2>
+<h2 class="text-2xl" >Log in</h2>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= render "admins/shared/error_messages", resource: resource %>
+  <% if notice.present? %>
+    <p style="color: red"><%= notice %></p>
+  <% end %>
   <div class="field">
     <%= f.label :email ,class:"lav"%><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"inp" %>

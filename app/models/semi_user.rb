@@ -2,7 +2,7 @@ class SemiUser < ApplicationRecord
   belongs_to :user
   has_one_attached :profile_pic
   validates :name, :date_of_birth, presence: true
-  before_validation :calculate_age
+  before_create :calculate_age
   has_many :my_lists, dependent: :destroy
 
 
