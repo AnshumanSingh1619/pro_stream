@@ -1,9 +1,14 @@
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(34, 23, 23);
+    color: white;
+  }
+</style>
 <p style="color: green"><%= notice %></p>
-<h1 class="text-danger ml-5">Pro Stream</h1>
-<%= link_to 'Back to Home', root_path, class: 'btn btn-outline-primary btn-lg mb-4 bi bi-arrow-left-short text-white mt-8' %>
-<div class="container">
-  <h1>Choose the plan that’s right for you,</h1>
-  <div class="container">
+<div class="mr-20 ml-20 mt-10">
+  <h1 class="text-4xl text-red-700 mt-4 decoration-4">Choose the plan that’s right for you,</h1>
+  <div class="mr-8 ml-8">
     <ul>
       <li>Watch all you want.</li>
       <li>Recommendations just for you.</li>
@@ -11,164 +16,183 @@
       <li>Enjoy Movies and Tv Show.</li>
       <li>Add Your Favourite movies and Tv show to your list.</li>
     </ul>
-    <button type="button" class="btn btn-primary mb-1 ml-10" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      View term and condition
-    </button>
-  </div>
-  <div class="container text-center">
-    <div class="row">
-      <div class="col">
-        <div class="container border border-success">
-          <div class="mt-3 mb-4">
-            <h3>Monthly Plan</h3>
-          </div>
-          <hr/>
-          <div class="mt-3 mb-2">
-            <h5>Price</h5>
-            <p>$15 For a months</p>
-          </div>
-          <hr/>
-          <div class="mt-3 mb-2">
-            <h5>Resolution</h5>
-            <p>4K (Ultra HD) + HDR</p>
-          </div>
-          <hr/>
-          <div class="mt-3 mb-2">
-            <h5>Devices your household can watch at the same time</h5>
-            <p>4</p>
-          </div>
-          <hr/>
-          <div class="mt-3 mb-2">
-            <h5>Video and sound quality</h5>
-            <p>Best</p>
-          </div>
-          <hr/>
-          <div class="mt-3 mb-2">
-            <h5>Supported devices</h5>
-            <p>Mobile phone, tablet</p>
-          </div>
-          <hr/>
-          <%= button_to 'Subscribe', stripe_checkout_path(price_id: @monthly_price.id), data: { turbo: 'false' }, class: 'btn btn-primary mb-3' %>
-        </div>  
-      </div>
-      <div class="col">
-        <div class="container border border-success">
-          <div class="mt-3 mb-4">
-            <h3>Three Months Plan</h3>
-          </div>
-          <hr/>
-          <div class="mt-3 mb-2">
-            <h5>Price</h5>
-            <p>$40 For 3 months</p>
-          </div>
-          <hr/>
-          <div class="mt-3 mb-2">
-            <h5>Resolution</h5>
-            <p>4K (Ultra HD) + HDR</p>
-          </div>
-          <hr/>
-          <div class="mt-3 mb-2">
-            <h5>Devices your household can watch at the same time</h5>
-            <p>4</p>
-          </div>
-          <hr/>
-          <div class="mt-3 mb-2">
-            <h5>Video and sound quality</h5>
-            <p>Best</p>
-          </div>
-          <hr/>
-          <div class="mt-3 mb-2">
-            <h5>Supported devices</h5>
-            <p>TV, computer, mobile phone, tablet</p>
-          </div>
-          <hr/>
-          <%= button_to 'Subscribe', stripe_checkout_path(price_id: @quarterly_price.id), data: { turbo: 'false' }, class: 'btn btn-primary mb-3'  %>
+  </div>  
+  <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+    View term and condition
+  </button>
+  <div class="grid grid-cols-4 gap-10 text-center mt-5">
+    <div class="border border-lime-500">
+      <div class="mr-5 ml-5">
+        <div class="mt-3 mb-4">
+          <h3 class="text-3xl text-white-700 mt-4 decoration-4">Monthly Plan</h3>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <h5 class="text-xl text-white-700 mt-4 decoration-4">Price</h5>
+          <p>$15 For a months</p>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <h5 class="text-xl text-white-700 mt-4 decoration-4">Resolution</h5>
+          <p>4K (Ultra HD) + HDR</p>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <h5 class="text-xl text-white-700 mt-4 decoration-4">Devices your household can watch at the same time</h5>
+          <p>4</p>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <h5 class="text-xl text-white-700 mt-4 decoration-4">Video and sound quality</h5>
+          <p>Best</p>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <h5 class="text-xl text-white-700 mt-4 decoration-4">Supported devices</h5>
+          <p>Mobile phone, tablet</p>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <%= button_to 'Subscribe', stripe_checkout_path(price_id: @monthly_price.id), data: { turbo: 'false' }, class: 'text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800' %>
         </div>
       </div>  
-      <div class="col">
-        <div class="container border border-success">
-          <div class="mt-3 mb-4">
-            <h3>Six Months Plan</h3>
-          </div>
-          <hr/>
-          <div class="mt-3 mb-2">
-            <h5>Price</h5>
-            <p>$70 For 6 months</p>
-          </div>
-          <hr/>
-          <div class="mt-3 mb-2">
-            <h5>Resolution</h5>
-            <p>4K (Ultra HD) + HDR</p>
-          </div>
-          <hr/>
-          <div class="mt-3 mb-2">
-            <h5>Devices your household can watch at the same time</h5>
-            <p>4</p>
-          </div>
-          <hr/><div class="mt-3 mb-2">
-            <h5>Video and sound quality</h5>
-            <p>Best</p>
-          </div>
-          <hr/>
-          <div class="mt-3 mb-2">
-            <h5>Supported devices</h5>
-            <p>TV, computer, mobile phone, tablet</p>
-          </div>
-          <hr/>
-          <%= button_to 'Subscribe', stripe_checkout_path(price_id: @halfyearly_price.id), data: { turbo: 'false' }, class: 'btn btn-primary mb-3'  %>
+    </div>
+    <div class="border border-lime-500">
+      <div class="mr-5 ml-5">
+        <div class="mt-3 mb-4">
+          <h3 class="text-3xl text-white-700 mt-4 decoration-4">Three Months Plan</h3>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <h5 class="text-xl text-white-700 mt-4 decoration-4">Price</h5>
+          <p>$40 For 3 months</p>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <h5 class="text-xl text-white-700 mt-4 decoration-4">Resolution</h5>
+          <p>4K (Ultra HD) + HDR</p>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <h5 class="text-xl text-white-700 mt-4 decoration-4">Devices your household can watch at the same time</h5>
+          <p>4</p>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <h5 class="text-xl text-white-700 mt-4 decoration-4">Video and sound quality</h5>
+          <p>Best</p>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <h5 class="text-xl text-white-700 mt-4 decoration-4">Supported devices</h5>
+          <p>TV, computer, mobile phone, tablet</p>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <%= button_to 'Subscribe', stripe_checkout_path(price_id: @monthly_price.id), data: { turbo: 'false' }, class: 'text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800' %>
         </div>
       </div>  
-      <div class="col">
-        <div class="container border border-success">
-          <div class="mt-3 mb-4">
-            <h3>Yearly Plan</h3>
-          </div>
-          <hr/>
-          <div class="mt-3 mb-2">
-            <h5>Price</h5>
-            <p>$130 For a Year</p>
-          </div>
-          <hr/>
-          <div class="mt-3 mb-2">
-            <h5>Resolution</h5>
-            <p>4K (Ultra HD) + HDR</p>
-          </div>
-          <hr/>
-          <div class="mt-3 mb-2">
-            <h5>Devices your household can watch at the same time</h5>
-            <p>4</p>
-          </div>
-          <hr/>
-          <div class="mt-3 mb-2">
-            <h5>Video and sound quality</h5>
-            <p>Best</p>
-          </div>
-          <hr/>
-          <div class="mt-3 mb-2">
-            <h5>Supported devices</h5>
-            <p>TV, computer, mobile phone, tablet</p>
-          </div>
-          <hr/>
-          <%= button_to 'Subscribe', stripe_checkout_path(price_id: @yearly_price.id), data: { turbo: 'false' }, class: 'btn btn-primary mb-3'  %>
+    </div>
+    <div class="border border-lime-500">
+      <div class="mr-5 ml-5">
+        <div class="mt-3 mb-4">
+          <h3 class="text-3xl text-white-700 mt-4 decoration-4">Six Months Plan</h3>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <h5 class="text-xl text-white-700 mt-4 decoration-4">Price</h5>
+          <p>$70 For 6 months</p>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <h5 class="text-xl text-white-700 mt-4 decoration-4">Resolution</h5>
+          <p>4K (Ultra HD) + HDR</p>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <h5 class="text-xl text-white-700 mt-4 decoration-4">Devices your household can watch at the same time</h5>
+          <p>4</p>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <h5 class="text-xl text-white-700 mt-4 decoration-4">Video and sound quality</h5>
+          <p>Best</p>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <h5 class="text-xl text-white-700 mt-4 decoration-4">Supported devices</h5>
+          <p>TV, computer, mobile phone, tablet</p>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <%= button_to 'Subscribe', stripe_checkout_path(price_id: @monthly_price.id), data: { turbo: 'false' }, class: 'text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800' %>
         </div>
       </div>  
-    </div>  
+    </div>
+    <div class="border border-lime-500">
+      <div class="mr-5 ml-5">
+        <div class="mt-3 mb-4">
+          <h3 class="text-3xl text-white-700 mt-4 decoration-4">Yearly Plan</h3>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <h5 class="text-xl text-white-700 mt-4 decoration-4">Price</h5>
+          <p>$150 For a year</p>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <h5 class="text-xl text-white-700 mt-4 decoration-4">Resolution</h5>
+          <p>4K (Ultra HD) + HDR</p>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <h5 class="text-xl text-white-700 mt-4 decoration-4">Devices your household can watch at the same time</h5>
+          <p>4</p>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <h5 class="text-xl text-white-700 mt-4 decoration-4">Video and sound quality</h5>
+          <p>Best</p>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <h5 class="text-xl text-white-700 mt-4 decoration-4">Supported devices</h5>
+          <p>TV, computer, mobile phone, tablet</p>
+        </div>
+        <hr/>
+        <div class="mt-3 mb-2">
+          <%= button_to 'Subscribe', stripe_checkout_path(price_id: @monthly_price.id), data: { turbo: 'false' }, class: 'text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800' %>
+        </div>
+      </div>  
+    </div>
   </div>  
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content text-dark">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Terms and Condition</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!-- Main modal -->
+<div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+  <div class="relative p-4 w-full max-w-2xl max-h-full">
+    <!-- Modal content -->
+    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+      <!-- Modal header -->
+      <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+          Terms and Condition
+        </h3>
+        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+          </svg>
+          <span class="sr-only">Close modal</span>
+        </button>
       </div>
-      <div class="modal-body ">
-        <%= render "terms_condition" %>
+      <!-- Modal body -->
+      <div class="p-4 md:p-5 space-y-4">
+        <%= render "terms_condition" %> 
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Decline</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Accept</button>
+      <!-- Modal footer -->
+      <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+        <button data-modal-hide="default-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Accept</button>
+        <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Decline</button>
       </div>
     </div>
   </div>
