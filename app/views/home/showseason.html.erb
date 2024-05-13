@@ -35,7 +35,8 @@
       </button>
       <div id="dropdown1" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-          <% @content.seasons.each do |season| %>
+          <% seasons = @content.seasons.order(:season_no) %>
+          <% seasons.each do |season| %>
             <li>
               <%= link_to "Season #{season.season_no}", showseason_path(@content.id, season.id),  class: "block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" %>
             </li>
@@ -50,8 +51,7 @@
         <%= button_to "Add to list", add_to_list_path(@content.id), method: :post, class: "text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900", style: "width: 100%" %>
       <% end %>
     <% end %>  
-    <% episodes = @season.episodes %>
-    <% episodes.sort_by(&:episode_no) %>
+    <% episodes = @season.episodes.order(:episode_no) %>
     <% episodes.each do |episode| %>
       <div width="100%" height="30px" >
         <p><%= "S#{@season.season_no}" %> <%= "Ep #{episode.episode_no}" %></p>
