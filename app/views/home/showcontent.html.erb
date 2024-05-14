@@ -29,7 +29,14 @@
     cursor: pointer;
   }
 </style>
-<main class=" ml-20 mt-8">
+<div class="mt-8">
+  <%= link_to root_path, class: 'text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg mt-8 text-sm px-5 py-2.5 text-center me-2 mb-2' do %>
+    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+    Back to Home
+  <% end %>
+</div>
+
+<main class="ml-20 mt-8">
 <h1 class="text-5xl text-red-700 mt-4"><%= @content.name %></h1>
 <h1>Trailer</h1>
 <div class="grid grid-cols-10 gap-4">
