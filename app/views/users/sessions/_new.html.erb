@@ -1,0 +1,31 @@
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="p-4 md:p-5 space-y-4">
+    <%= render "users/shared/error_messages", resource: resource %>
+    <% if notice.present? %>
+      <p style="color: red"><%= notice %></p>
+    <% end %>
+    <div class="field">
+      <%= f.label :email ,class:"lav"%><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"inp" %>
+      <p>We'll never share your email with anyone else.</p>
+    </div>
+  
+    <div class="field">
+      <%= f.label :password %><br />
+      <%= f.password_field :password, autocomplete: "current-password",class:"inp" %>
+    </div>
+  
+    <% if devise_mapping.rememberable? %>
+      <div class="field">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+    <%= f.submit "Log in" ,class:"text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 mr-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"%>
+    </br>
+    <%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" %>
+  </div>
+<% end %>
