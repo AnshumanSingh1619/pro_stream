@@ -1,9 +1,6 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="p-4 md:p-5 space-y-4">
     <%= render "users/shared/error_messages", resource: resource %>
-    <% if notice.present? %>
-      <p style="color: red"><%= notice %></p>
-    <% end %>
     <div class="field">
       <%= f.label :email ,class:"lav"%><br />
       <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"inp" %>
