@@ -11,22 +11,28 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
-    semi_user = SemiUser.new(
-      name: @user.firstname,
-      age: @user.age,
-      date_of_birth: @user.date_of_birth,
-      user_id: @user.id
-    )
-    semi_user.save
-    now = Time.zone.now.to_date
-    semi_user1 = SemiUser.new(
-      name: "child",
-      age: 10,
-      date_of_birth: (now - 10.years).to_date,
-      user_id: @user.id
-    )
-    semi_user1.save
+    super do |resource|
+      unless resource.errors.empty?
+        flash[:notice] = resource.errors.full_messages.join(', ')
+        redirect_to new_user_session_path
+        return
+      end
+      semi_user = SemiUser.new(
+        name: @user.firstname,
+        age: @user.age,
+        date_of_birth: @user.date_of_birth,
+        user_id: @user.id
+      )
+      semi_user.save
+      now = Time.zone.now.to_date
+      semi_user1 = SemiUser.new(
+        name: "child",
+        age: 10,
+        date_of_birth: (now - 10.years).to_date,
+        user_id: @user.id
+      )
+      semi_user1.save
+    end
   end
 
   # GET /resource/edit
