@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super do |resource|
       unless resource.errors.empty?
-        flash[:notice] = resource.errors.full_messages.join(', ')
+        flash[:alert] = resource.errors.full_messages.join(', ')
         redirect_to new_user_session_path
         return
       end

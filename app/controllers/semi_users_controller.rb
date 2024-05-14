@@ -25,7 +25,7 @@ class SemiUsersController < ApplicationController
         format.html { redirect_to semi_users_path, notice: "Semi user was successfully updated." }
         format.json { render :show, status: :created }
       else
-        format.html { redirect_to semi_users_path, notice: @semi_user.errors.full_messages.join(", ") }
+        format.html { redirect_to semi_users_path, alert: @semi_user.errors.full_messages.join(", ") }
         format.json { render json: @semi_user.errors, status: :unprocessable_entity }
       end
     end
@@ -37,7 +37,7 @@ class SemiUsersController < ApplicationController
         format.html { redirect_to semi_users_path, notice: "Semi user was successfully updated." }
         format.json { render :show, status: :ok, location: @semi_user }
       else
-        format.html { redirect_to semi_users_path, notice: @semi_user.errors.full_messages.join(", ") }
+        format.html { redirect_to semi_users_path, alert: @semi_user.errors.full_messages.join(", ") }
         format.json { render json: @semi_user.errors, status: :unprocessable_entity }
       end
     end
