@@ -4,6 +4,8 @@
     background-color: #111;
   }
 </style>
+<%= render 'shared/header' %>
+<main class="mr-20 ml-20 mt-12">
 <div class="grid grid-cols-3 gap-4">
   <% @my_lists.each do |my_list| %>
   <% content = Content.find_by(id: my_list.content_id) %>
@@ -21,3 +23,4 @@
     <% end %>
   <% end %>
 </div>
+</main>

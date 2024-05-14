@@ -1,3 +1,5 @@
+<%= render 'shared/header' %>
+<main class="mr-20 ml-20 mt-8">
 <div class="grid grid-cols-3 gap-4">
   <% @contents.each do |content| %>
     <% if content.poster.present? %>
@@ -14,3 +16,4 @@
     <% end %>
   <% end %>
 </div>
+</main>

@@ -29,6 +29,7 @@
     cursor: pointer;
   }
 </style>
+<main class=" ml-20 mt-8">
 <h1 class="text-5xl text-red-700 mt-4"><%= @content.name %></h1>
 <h1>Trailer</h1>
 <div class="grid grid-cols-10 gap-4">
@@ -69,6 +70,7 @@
     <%= @content.actor %>
   </p>
 </div>
+</main>
 <div class="video-player" id="videoPlayer">
   <video width="100%" controls controlsList="nodownload" id="myVideo">
     <source src="" type="video/mp4">

@@ -26,6 +26,8 @@
     margin-right: 30px; 
   }
 </style>
+<%= render 'shared/header' %>
+<main class="mr-20 ml-20 mt-8">
 <% contents = @contents %>
 <div class="container-fluid">
   <h1 class="text-danger mb-0">New Movies</h1>
@@ -101,4 +103,5 @@
   <h1 class="text-danger mb-0">New Movies</h1>
   <%= render "shared/shome", contents: contents %>
 </div>
+</main>
 

@@ -16,13 +16,7 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.turbo.min.js"></script>
   </head>
-
   <body>
-    <% if admin_signed_in? || user_signed_in? %>
-      <%= render 'shared/header' %>
-    <% end %>
-    <main class="mr-20 ml-20 mt-8">
       <%= yield %>
-    </main>
   </body>
 </html>
