@@ -11,7 +11,6 @@ Rails.application.routes.draw do
     passwords: 'admins/passwords',
     registrations: 'admins/registrations'
   }
-  resources :contents
   resources :semi_users
   root to: "home#index"
   get '/prostream/content/:content_id/', to: 'home#showcontent', as: 'showcontent'
