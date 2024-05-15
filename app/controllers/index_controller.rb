@@ -31,7 +31,7 @@ class IndexController < ApplicationController
     end
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.update('search_results', partial: "shared/index", locals: { contents: contents })
+        render turbo_stream: turbo_stream.update('search_results', partial: "shared/categorise", locals: { contents: contents })
       end
       format.html {}
     end    
