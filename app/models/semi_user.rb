@@ -15,3 +15,18 @@ class SemiUser < ApplicationRecord
     end
   end
 end
+
+
+#.alert{
+#  position: absolute;
+#  left: 750px;
+#  top: 0px;
+#}
+#</style>
+#<% if alert.present? %>
+#<div class="max-w-sm p-6 alert bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+#<a href="#">
+#  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><%= alert %></h5>
+#</a>
+#</div>
+#<% end %>
