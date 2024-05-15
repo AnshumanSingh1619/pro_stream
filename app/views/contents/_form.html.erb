@@ -65,10 +65,8 @@
     <%= form.select :movie_type, options_for_select(["Movie", "Webseries"]), class: "inp" %>
   </div>
 
-  <div>
-    <h2 class="font-bold mt-4">Seasons</h2>
-  </div>
   <div id="seasons">
+    <h2 class="font-bold mt-4">Seasons</h2>
     <%= form.fields_for :seasons do |season_form| %>
       <%= render 'season_fields', f: season_form %>
     <% end %>
