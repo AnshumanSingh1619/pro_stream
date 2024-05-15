@@ -25,13 +25,11 @@
     overflow: hidden;
     margin-right: 30px; 
   }
-  .allcontents{
-    display: none;
-  }
 </style>
 <main class="mr-20 ml-20 mt-8">
 <div class="container-fluid">
   <h1 class="text-danger mb-0">New Movies</h1>
+  <% contents = @allcontents %>
   <%= render "shared/shome", contents: contents %>
 </div>
 

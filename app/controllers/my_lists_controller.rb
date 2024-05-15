@@ -3,8 +3,14 @@ class MyListsController < ApplicationController
   before_action :set_content, only: [:create, :destroy]
 
   def index
-    my_lists = MyList.where(semi_user_id: session[:current_semi_user_id]["value"])
-    @my_lists = my_lists.order(id: :desc)
+    my_list = MyList.where(semi_user_id: session[:current_semi_user_id]["value"])
+    my_lists = my_list.order(id: :desc)
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update('search_results', partial: "shared/mylist", locals: { my_lists: my_lists })
+      end
+      format.html {}
+    end 
   end  
   
   def create 
