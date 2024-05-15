@@ -5,8 +5,14 @@
     color: white;
   }
 </style>
+<%= render 'shared/notice' %>
+<div class="mt-8">
+  <%= link_to root_path, class: 'text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg mt-8 text-sm px-5 py-2.5 text-center me-2 mb-2' do %>
+    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+    Back to Home
+  <% end %>
+</div>
 <main class="mr-20 ml-20 mt-8">
-<p style="color: green"><%= notice %></p>
 <div class="mr-20 ml-20 mt-10">
   <h1 class="text-4xl text-red-700 mt-4 decoration-4">Choose the plan that’s right for you,</h1>
   <div class="mr-8 ml-8">

@@ -10,14 +10,7 @@ class Admins::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    admin = Admin.find_by(email: params[:admin][:email])
-    if admin.present?
-      super
-    else
-      respond_to do |format|
-        format.html { redirect_to new_admin_session_path, notice: "Email you entered is wrong" }
-      end
-    end
+    super
   end
 
   # DELETE /resource/sign_out
