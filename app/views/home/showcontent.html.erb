@@ -10,9 +10,8 @@
     border-radius: 5px;
     box-shadow: 0px 0px 2px 2px red;
   }
-  
   .video-player {
-    width: 80%;
+    width: 90%;
     position: absolute;
     left: 50%;
     bottom: 10px;
@@ -29,13 +28,13 @@
     cursor: pointer;
   }
 </style>
+<div id="all-page">
 <div class="mt-8">
-  <%= link_to root_path, class: 'text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg mt-8 text-sm px-5 py-2.5 text-center me-2 mb-2' do %>
+  <%= link_to root_path, class: 'text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800' do %>
     <i class="fa fa-arrow-left" aria-hidden="true"></i>
     Back to Home
   <% end %>
 </div>
-
 <main class="ml-20 mt-8">
 <h1 class="text-5xl text-red-700 mt-4"><%= @content.name %></h1>
 <h1>Trailer</h1>
@@ -78,6 +77,10 @@
   </p>
 </div>
 </main>
+<% if admin_signed_in? %>
+  <%= link_to "Edit this content", edit_content_path(@content) %> |
+<% end %> 
+</div>
 <div class="video-player" id="videoPlayer">
   <video width="100%" controls controlsList="nodownload" id="myVideo">
     <source src="" type="video/mp4">
@@ -86,19 +89,17 @@
     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4"/>
   </svg>
 </div>
-    
-<% if admin_signed_in? %>
-  <%= link_to "Edit this content", edit_content_path(@content) %> |
-<% end %>  
 
 <script>
   document.querySelector('.close-btn').addEventListener('click', stopVideo);
   var videoPlayer = document.getElementById("videoPlayer");
   var myVideo = document.getElementById("myVideo");
   var trailerVideo = document.getElementById("my-player"); 
+  var Allpage = document.getElementById("all-page"); 
   
   function stopVideo() {
     videoPlayer.style.display = "none";
+    Allpage.style.display = "block";
     myVideo.pause(); 
     trailerVideo.pause();
   }  
@@ -106,6 +107,7 @@
   function playVideo(file) {
     myVideo.src = file;
     videoPlayer.style.display = "block";
+    Allpage.style.display = "none";
     myVideo.play();
     trailerVideo.pause(); 
   } 
