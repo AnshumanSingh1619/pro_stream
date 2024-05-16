@@ -6,7 +6,7 @@ class IndexController < ApplicationController
     contents = @mcontents.where(movie_type: "Movie")
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.update('search_results', partial: "shared/index", locals: { contents: contents })
+        render turbo_stream: turbo_stream.update('search_results', partial: "shared/index", locals: { contents: contents, class_name: "movie" })
       end
       format.html {}
     end    
@@ -16,7 +16,7 @@ class IndexController < ApplicationController
     contents = @mcontents.where(movie_type: "Webseries")
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.update('search_results', partial: "shared/index", locals: { contents: contents })
+        render turbo_stream: turbo_stream.update('search_results', partial: "shared/index", locals: { contents: contents, class_name: "webseries" })
       end
       format.html {}
     end    
