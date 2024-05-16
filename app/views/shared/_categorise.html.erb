@@ -6,21 +6,43 @@
   .allcontents{
     display: none;
   }
+  .paragraph-container {
+    margin:auto;
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding:25px;
+    width: 35%;
+  }
+  .paragraph {
+    width: 100%;
+    text-align: center;
+  }
 </style>
 <main class="mr-20 ml-20 mt-8">
 <div class="grid grid-cols-3 gap-4">
-  <% contents.each do |content| %>
-    <% if content.poster.present? %>
-      <div class="relative group">
-        <%= link_to (content.seasons.present? ? showseason_path(content.id, content.seasons.find_by(season_no: 1).id) : showcontent_path(content.id)), class: "block overflow-hidden border rounded-lg shadow-md group-hover:shadow-lg transition duration-300" do %>
-          <div class="h-72">
-            <img class="content-img object-cover w-full h-full" src="<%= url_for(content.poster) %>" />
-          </div>
-          <div class="absolute inset-0 flex justify-center items-center bg-gray-800 bg-opacity-0 group-hover:bg-opacity-75 transition duration-300 opacity-0 group-hover:opacity-100">
-            <h3 class="text-white text-xl font-semibold uppercase text-center"><%= content.name %></h3>
-          </div>
-        <% end %>
+  <% if contents == "we dont have" %>
+    <div class="paragraph-container">
+      <div class="paragraph">
+        <p class="text-5xl text-white font-extrabold">Oops. We haven't got that.</p>
+        <p class="text-white">Try searching for another movie or show</p>
       </div>
+    </div>      
+  <% else %>
+    <% contents.each do |content| %>
+      <% if content.poster.present? %>
+        <div class="relative group">
+          <%= link_to (content.seasons.present? ? showseason_path(content.id, content.seasons.find_by(season_no: 1).id) : showcontent_path(content.id)), class: "block overflow-hidden border rounded-lg shadow-md group-hover:shadow-lg transition duration-300" do %>
+            <div class="h-72">
+              <img class="content-img object-cover w-full h-full" src="<%= url_for(content.poster) %>" />
+            </div>
+            <div class="absolute inset-0 flex justify-center items-center bg-gray-800 bg-opacity-0 group-hover:bg-opacity-75 transition duration-300 opacity-0 group-hover:opacity-100">
+              <h3 class="text-white text-xl font-semibold uppercase text-center"><%= content.name %></h3>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 </div>

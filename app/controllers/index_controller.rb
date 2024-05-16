@@ -26,6 +26,9 @@ class IndexController < ApplicationController
     parameter = params[:search_term]
     if parameter.present?
       contents = @mcontents.where("name ILIKE ?", "%#{parameter}%")
+      if contents.empty?
+        contents = "we dont have"
+      end
     else
       contents = []
     end
