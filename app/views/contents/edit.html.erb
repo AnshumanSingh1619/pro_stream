@@ -1,7 +1,15 @@
+<style>
+  .inp{
+    width: 50%;
+    height: auto;
+    margin:5px;
+    font-size:20px;
+  }
+</style>
 <%= render 'shared/notice' %>
 <main class="mr-20 ml-20 mt-8">
 <div class="container">
-  <h1>Editing content</h1>  
+  <h1 class="font-bold text-rose-700">Editing content</h1>  
   <%= render "form", content: @content %>
   <br>
   <div>

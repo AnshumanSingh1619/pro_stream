@@ -1,106 +1,109 @@
-<%= form_with(model: content) do |form| %>
-  <% if content.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(content.errors.count, "error") %> prohibited this content from being saved:</h2>
-      <ul>
-        <% content.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+<form>
+  <%= form_with(model: content) do |form| %>
+    <div class="grid gap-2 mb-6 md:grid-cols-3">  
+      <% if content.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(content.errors.count, "error") %> prohibited this content from being saved:</h2>
+          <ul>
+            <% content.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+  
+      <div>
+        <%= form.label :name, class: "block font-bold" %>
+        <%= form.text_field :name, class: "inp" %>
+      </div>
+    
+      <div>
+        <%= form.label :actor, class: "block font-bold" %>
+        <%= form.text_field :actor, class: "inp" %>
+      </div>
+    
+      <div>
+        <%= form.label :director, class: "block font-bold" %>
+        <%= form.text_field :director, class: "inp" %>
+      </div>
+    </div>
+
+    <div>
+      <%= form.label :description, class: "block font-bold" %>
+      <%= form.text_area :description, class: "inp" %>
+    </div>
+
+    <div>
+      <%= form.label :trailer, class: "block font-bold" %>
+      <%= form.file_field :trailer, accept: "video/*", class: "btn btn-danger mt-2 mb-2" %>
+    </div>
+  
+    <div>
+      <%= form.label :movie, class: "block font-bold" %>
+      <%= form.file_field :movie, accept: "video/*", class: "btn btn-danger mt-2 mb-2" %>
+    </div>
+  
+    <div>
+      <%= form.label :poster, class: "block font-bold" %>
+      <%= form.file_field :poster, accept: 'image/*', class: "btn btn-danger mt-2 mb-2" %>
+    </div>
+
+
+    <div>
+      <%= form.label :languages, class: "block font-bold" %>
+      <div class="inp">
+        <% ["Hindi", "English", "Tamil", "Telugu", "Malayalam", "Marathi", "Spanish"].each do |language| %>
+          <%= form.check_box :languages, { multiple: true }, language, nil %>
+          <%= form.label :languages, language %>
         <% end %>
-      </ul>
+      </div>
+    </div>
+
+    <div>
+      <%= form.label :available_for_kids, class: "block font-bold" %>
+      <div class="inp">
+        <%= form.radio_button :available_for_kids, "for 18+ only"%>
+        <%= form.label :available_for_kids, "for 18+ only" %>
+        <%= form.radio_button :available_for_kids, "Available for all" %>
+        <%= form.label :available_for_kids, "Available for all" %>
+      </div>
+    </div>
+
+    <div>
+      <%= form.label :type_of_content, class: "block font-bold" %>
+      <div class="inp">
+        <% ["Action", "Romance", "Science", "Thrillers", "Horror", "Bollywood", "Documentaries", "Dramas"].each do |content_type| %>
+          <%= form.check_box :type_of_content, { multiple: true }, content_type, nil %>
+          <%= form.label :type_of_content, content_type %>
+        <% end %>
+      </div>
+    </div>
+
+    <div>
+      <%= form.label :movie_type, class: "block font-bold" %>
+      <div class="inp">
+        <%= form.radio_button :movie_type, "Movie", id: "webseries-select", onchange: "hide_add_season()" %>
+        <%= form.label :movie_type, "Movie" %>
+        <%= form.radio_button :movie_type, "Webseries", id: "webseries-select", onchange: "show_add_season()" %>
+        <%= form.label :movie_type, "Webseries" %>
+      </div>
+    </div>
+
+    <h3 class="font-bold mt-2">Seasons</h3>
+    <div id="seasons">
+      <%= form.fields_for :seasons do |season_form| %>
+        <%= render 'season_fields', f: season_form %>
+      <% end %>
+      <div class="links mt-2 add_season" id="add-season-link" style="padding-bottom: 20px; display: none;">
+        <%= link_to_add_association 'Add Season', form, :seasons, class: "text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-10 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" %>
+      </div>
+    </div>
+  
+    <div>
+      <%= form.submit "Submit", class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :languages, class: "block font-bold" %>
-    <div class="inp">
-      <% ["Hindi", "English", "Tamil", "Telugu", "Malayalam", "Marathi", "Spanish"].each do |language| %>
-        <%= form.check_box :languages, { multiple: true }, language, nil %>
-        <%= form.label :languages, language %>
-      <% end %>
-    </div>
-  </div>
-
-
-  <div>
-    <%= form.label :name, class: "block font-bold" %>
-    <%= form.text_field :name, class: "inp" %>
-  </div>
-
-  <div>
-    <%= form.label :available_for_kids, class: "block font-bold" %>
-    <div class="inp">
-      <%= form.radio_button :available_for_kids, "for 18+ only"%>
-      <%= form.label :available_for_kids, "for 18+ only" %>
-      <%= form.radio_button :available_for_kids, "Available for all" %>
-      <%= form.label :available_for_kids, "Available for all" %>
-    </div>
-  </div>
-
-  <div>
-    <%= form.label :type_of_content, class: "block font-bold" %>
-    <div class="inp">
-      <% ["Action", "Romance", "Science", "Thrillers", "Horror", "Bollywood", "Documentaries", "Dramas"].each do |content_type| %>
-        <%= form.check_box :type_of_content, { multiple: true }, content_type, nil %>
-        <%= form.label :type_of_content, content_type %>
-      <% end %>
-    </div>
-  </div>
-
-  <div>
-    <%= form.label :actor, class: "block font-bold" %>
-    <%= form.text_field :actor, class: "inp" %>
-  </div>
-
-  <div>
-    <%= form.label :description, class: "block font-bold" %>
-    <%= form.text_area :description, class: "inp" %>
-  </div>
-
-  <div>
-    <%= form.label :director, class: "block font-bold" %>
-    <%= form.text_field :director, class: "inp" %>
-  </div>
-
-  <div>
-    <%= form.label :trailer, class: "block font-bold" %>
-    <%= form.file_field :trailer, accept: "video/*", class: "btn btn-danger mt-2 mb-2" %>
-  </div>
-
-  <div>
-    <%= form.label :movie, class: "block font-bold" %>
-    <%= form.file_field :movie, accept: "video/*", class: "btn btn-danger mt-2 mb-2" %>
-  </div>
-
-  <div>
-    <%= form.label :poster, class: "block font-bold" %>
-    <%= form.file_field :poster, accept: 'image/*', class: "btn btn-danger mt-2 mb-2" %>
-  </div>
-
-  <div>
-    <%= form.label :movie_type, class: "block font-bold" %>
-    <div class="inp">
-      <%= form.radio_button :movie_type, "Movie", id: "webseries-select", onchange: "hide_add_season()" %>
-      <%= form.label :movie_type, "Movie" %>
-      <%= form.radio_button :movie_type, "Webseries", id: "webseries-select", onchange: "show_add_season()" %>
-      <%= form.label :movie_type, "Webseries" %>
-    </div>
-  </div>
-  
-  <h3 class="font-bold mt-2">Seasons</h3>
-  <div id="seasons">
-    <%= form.fields_for :seasons do |season_form| %>
-      <%= render 'season_fields', f: season_form %>
-    <% end %>
-    <div class="links mt-2 add_season" id="add-season-link" style="padding-bottom: 20px; display: none;">
-      <%= link_to_add_association 'Add Season', form, :seasons, class: "text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-10 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" %>
-    </div>
-  </div>
-
-  <div>
-    <%= form.submit "Submit", class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
-  </div>
-<% end %>
-
+</form>
 <script>
   var WebseriesSelect = document.getElementById("webseries-select"); 
   var AddSeason = document.getElementById("add-season-link"); 
