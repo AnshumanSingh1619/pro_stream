@@ -11,6 +11,7 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     super
+    UserMailer.registration().deliver_now
   end
 
 
