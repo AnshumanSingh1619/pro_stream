@@ -1,6 +1,8 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  #config.action_mailer.default_url_options = {host: "pro-stream-hp1k.onrender.com", protocol: "https"}
+  #config.action_mailer.perform_deleveries = true
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -11,6 +13,18 @@ Rails.application.configure do
   # and those relying on copy on write to perform better.
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
+
+  # Email Configuration
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'gmail.com',
+    user_name: 'Rails.application.credentials.dig(:google_smtp, :email)',
+    password: 'Rails.application.credentials.dig(:google_smtp, :password)',
+    authentication: 'plain',
+    enable_starttls_auto: true
+  }
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local = false
@@ -74,7 +88,7 @@ Rails.application.configure do
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
