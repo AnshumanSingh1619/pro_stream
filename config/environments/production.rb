@@ -1,8 +1,8 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  #config.action_mailer.default_url_options = {host: "pro-stream-hp1k.onrender.com", protocol: "https"}
-  #config.action_mailer.perform_deleveries = true
+  config.action_mailer.default_url_options = {host: "pro-stream-hp1k.onrender.com", protocol: "https"}
+  config.action_mailer.perform_deleveries = true
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
