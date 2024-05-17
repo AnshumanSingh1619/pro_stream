@@ -6,12 +6,6 @@ class HomeController < ApplicationController
 
   def index
     @allcontents = @mcontents
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.update('search_results', partial: "shared/index", locals: { contents: @allcontents })
-      end
-      format.html {}
-    end    
   end
   
   def showcontent

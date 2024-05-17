@@ -6,7 +6,7 @@ class IndexController < ApplicationController
     contents = @mcontents.where(movie_type: "Movie")
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.update('search_results', partial: "shared/index", locals: { contents: contents, class_name: "movie" })
+        render turbo_stream: turbo_stream.update('search_results', partial: "shared/categorise", locals: { contents: contents, class_name: "movie" })
       end
       format.html {}
     end    
@@ -16,7 +16,7 @@ class IndexController < ApplicationController
     contents = @mcontents.where(movie_type: "Webseries")
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.update('search_results', partial: "shared/index", locals: { contents: contents, class_name: "webseries" })
+        render turbo_stream: turbo_stream.update('search_results', partial: "shared/categorise", locals: { contents: contents, class_name: "webseries" })
       end
       format.html {}
     end    
@@ -34,7 +34,7 @@ class IndexController < ApplicationController
     end
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.update('search_results', partial: "shared/categorise", locals: { contents: contents })
+        render turbo_stream: turbo_stream.update('search_results', partial: "shared/categorise", locals: { contents: contents, class_name: "web" })
       end
       format.html {}
     end    
@@ -46,7 +46,7 @@ class IndexController < ApplicationController
     contents = @mcontents.where("ARRAY[?]::varchar[] <@ #{column_name} AND ? ILIKE ANY (#{column_name}::varchar[])", parameter, parameter)
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.update('search_results', partial: "shared/categorise", locals: { contents: contents })
+        render turbo_stream: turbo_stream.update('search_results', partial: "shared/categorise", locals: { contents: contents, class_name: "#{parameter}" })
       end
       format.html {}
     end  
