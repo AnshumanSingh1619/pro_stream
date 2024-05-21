@@ -1,0 +1,2 @@
+module OtpAdminHelper
+end

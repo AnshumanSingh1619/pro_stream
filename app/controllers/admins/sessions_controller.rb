@@ -10,7 +10,19 @@ class Admins::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    super
+    self.resource = warden.authenticate!(auth_options)
+    if resource && resource.otp != "0"
+      otp = rand(111111..999999)
+      resource.update_attribute(:otp, otp)
+      DestroyAdminOtpJob.perform_in(5.minutes, resource.id)
+      UserMailer.send_otp(otp, resource.email).deliver_now
+      sign_out(resource)
+      redirect_to otp_verification_path(admin_id: resource.id), notice: 'Please verify your OTP sent to the super admin email to complete the registration.'
+    else
+      set_flash_message!(:notice, :signed_in)
+      sign_in(resource_name, resource)
+      respond_with resource, location: after_sign_in_path_for(resource)
+    end
   end
 
   # DELETE /resource/sign_out

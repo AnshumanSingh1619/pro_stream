@@ -67,8 +67,10 @@ group :test do
   gem "selenium-webdriver"
 end
 
+# tu use tailwindcss
 gem "tailwindcss-rails", "~> 2.5"
 
+# to deploy on render.com
 gem "render_build_setup", "~> 0.0.1"
 
 #for authentication
@@ -84,3 +86,6 @@ gem "stripe", "~> 11.0"
 
 # to add active storage on amazon web server
 gem "aws-sdk-s3", require: false
+
+# to perform job later
+gem "sidekiq", "~> 7.2"

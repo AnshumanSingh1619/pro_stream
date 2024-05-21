@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   get 'stripe/checkout/success', to: 'stripe/checkout#success'
   get 'stripe/checkout/cancel', to: 'stripe/checkout#cancel'
   post 'stripe/billing_portal', to: 'stripe/billing_portal#create'
+  get 'otp_verification', to: 'otp_admin#otp_verification', as: 'otp_verification'
+  post 'otp_verification', to: 'otp_admin#otp_verified'
+  post '/resend_otp', to: 'otp_admin#resend_otp', as: 'resend_otp'
 end
 
 
