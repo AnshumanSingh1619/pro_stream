@@ -19,7 +19,7 @@
 # end
 set :output, './log/cron.log'
 
-every 5.minutes do 
+every 1.minutes do 
   runner "puts 'Hello, world'"
   runner "puts Time.now"
   runner "User.send_content_user"
