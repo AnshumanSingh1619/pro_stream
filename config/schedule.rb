@@ -17,6 +17,8 @@
 # every 4.days do
 #   runner "AnotherModel.prune_old_records"
 # end
+set :environment, 'production' 
+
 set :output, './log/cron.log'
 
 every 1.minutes do 
