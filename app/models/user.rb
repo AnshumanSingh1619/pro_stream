@@ -13,6 +13,13 @@ class User < ApplicationRecord
   validates :firstname, :lastname, :date_of_birth, :gender, presence: true
   has_many :semi_users, dependent: :destroy
 
+  def self.send_content_user
+    users = User.all
+    users.each do |user|
+      UserMailer.send_content(user.email).deliver_now
+    end
+  end
+
   after_create do 
     stripe_customer = Stripe::Customer.create(
       email: email,
