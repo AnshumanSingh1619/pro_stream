@@ -6,8 +6,7 @@ class OtpAdminController < ApplicationController
   def otp_verified
     user_provided_otp = params[:otp]
     admin = Admin.find_by(id: params[:admin_id])
-    
-    if admin.otp == 11
+    if admin.otp == "11"
       redirect_to otp_verification_path(admin_id: admin.id), alert: 'Your OTP has expired.'
     else
       if admin && admin.otp == user_provided_otp

@@ -14,7 +14,7 @@ class Admins::SessionsController < Devise::SessionsController
     if resource && resource.otp != "0"
       otp = rand(111111..999999)
       resource.update_attribute(:otp, otp)
-      DestroyAdminOtpJob.perform_in(5.minutes, resource.id)
+      DestroyAdminOtpJob.perform_in(1.minutes, resource.id)
       UserMailer.send_otp(otp, resource.email).deliver_now
       sign_out(resource)
       redirect_to otp_verification_path(admin_id: resource.id), notice: 'Please verify your OTP sent to the super admin email to complete the registration.'
