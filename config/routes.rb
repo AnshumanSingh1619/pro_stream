@@ -1,6 +1,4 @@
-require 'sidekiq/web'
 Rails.application.routes.draw do
-  mount Sidekiq::Web => '/sidekiq'
   resources :my_lists
   resources :contents
   devise_for :users, controllers: {
