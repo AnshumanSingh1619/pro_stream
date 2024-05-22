@@ -20,7 +20,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
       resource.update_attribute(:otp, otp)
   
       UserMailer.send_otp(otp, resource.email).deliver_now
-      DestroyAdminOtpJob.perform_in(1.minute, resource.id)
+      DestroyAdminOtpJob.perform_in(5.minute, resource.id)
       redirect_to otp_verification_path(admin_id: resource.id), notice: 'Please verify your OTP sent to super admin email to complete the registration.'
     else
       clean_up_passwords resource
