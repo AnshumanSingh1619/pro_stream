@@ -24,7 +24,7 @@ class OtpAdminController < ApplicationController
     admin = Admin.find(params[:admin_id])
     otp = rand(111111..999999)
     admin.update_attribute(:otp, otp)
-    DestroyAdminOtpJob.perform_in(5.minute, admin.id)
+    DestroyAdminOtpJob.perform_in(1.minute, admin.id)
     UserMailer.send_otp(otp, admin.email).deliver_now
     redirect_to otp_verification_path(admin_id: admin.id), notice: 'OTP sent to super admin email'
   end  
