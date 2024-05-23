@@ -4,7 +4,7 @@ class ContentsController < ApplicationController
 
   # GET /contents or /contents.json
   def index
-    @contents = Content.all
+    @contents = Content.includes(seasons: :episodes, poster_attachment: :blob, movie_attachment: :blob, trailer_attachment: :blob).all
   end
 
   # GET /contents/1 or /contents/1.json

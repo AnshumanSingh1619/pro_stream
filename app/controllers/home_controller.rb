@@ -36,12 +36,12 @@ class HomeController < ApplicationController
   end
 
   def set_season
-    @season = @content.seasons.find(params[:season_id])
-  end
+    @season = @content.seasons.includes(:episodes).includes(episodes: { episode_attachment: :blob }).find(params[:season_id])
+  end  
 
   def authenticate 
     if admin_signed_in? 
-      @mcontents = Content.all
+      @mcontents = Content.includes(seasons: :episodes, poster_attachment: :blob, movie_attachment: :blob, trailer_attachment: :blob).all
     elsif user_signed_in?
       user_authenticate
     else
