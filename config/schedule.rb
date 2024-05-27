@@ -22,8 +22,11 @@ set :environment, 'production'
 set :output, './log/cron.log'
 
 every 1.minutes do 
-  runner "puts 'Hello, world'"
-  runner "puts Time.now"
-  runner "User.send_content_user"
+  # runner "puts 'Hello, world'"
+  # runner "puts Time.now"
+  # runner "User.send_content_user"
+  command "echo 'Hello, world'"
+  command "date"
+  rake "custom:send_content_user"
 end
 # Learn more: http://github.com/javan/whenever
