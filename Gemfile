@@ -92,3 +92,6 @@ gem "sidekiq", "~> 7.2"
 
 # to use cron job
 gem "whenever"
+
+
+gem 'kaminari'

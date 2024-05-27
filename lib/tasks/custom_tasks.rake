@@ -4,6 +4,7 @@ namespace :custom do
   task send_content_user: :environment do
     users = User.all
     users.each do |user|
+      
       UserMailer.send_content(user.email).deliver_now
     end
   end
