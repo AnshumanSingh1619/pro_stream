@@ -70,14 +70,14 @@
           <%= link_to 'Home' , root_path, class:'home block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-500 md:p-0' %>
         </li>
         <li>
-          <%= button_to 'Movie', show_movie_path, method: :post, remote: true, class:'movie block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 border-gray-700' %>
+          <%= link_to 'Movie', show_movie_path, method: :get, remote: true, class:'movie block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 border-gray-700' %>
         </li>
         <li>
-          <%= button_to 'Webseries', show_webseries_path, method: :post, remote: true, class:'webseries block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 border-gray-700' %>
+          <%= link_to 'Webseries', show_webseries_path, method: :get, remote: true, class:'webseries block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 border-gray-700' %>
         </li>
         <% if user_signed_in? %>
           <li>
-            <%= button_to 'My list', mylists_path, method: :post, remote: true, class:'mylist block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 border-gray-700' %>
+            <%= link_to 'My list', mylists_path, method: :post, class:'mylist block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 border-gray-700' %>
           </li>
         <% else %>  
           <li>
@@ -90,46 +90,46 @@
         <div id="dropdownNavbar" class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
           <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton">
             <li>
-              <%= button_to 'Hindi', custom_content_path("Hindi", "languages"), method: :post, remote: true, class: 'Hindi block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
+              <%= link_to 'Hindi', custom_content_path("Hindi", "languages"), method: :post, remote: true, class: 'Hindi block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
             </li>
             <li>
-              <%= button_to 'English', custom_content_path("English", "languages"), method: :post, remote: true, class: 'English block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
+              <%= link_to 'English', custom_content_path("English", "languages"), method: :post, remote: true, class: 'English block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
             </li>
             <li>
-              <%= button_to 'Tamil', custom_content_path("Tamil", "languages"), method: :post, remote: true, class: 'Tamil block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
+              <%= link_to 'Tamil', custom_content_path("Tamil", "languages"), method: :post, remote: true, class: 'Tamil block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
             </li>
             <li>
-              <%= button_to 'Telgu', custom_content_path("Telgu", "languages"), method: :post, remote: true, class: 'Telgu block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
+              <%= link_to 'Telgu', custom_content_path("Telgu", "languages"), method: :post, remote: true, class: 'Telgu block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
             </li>
             <li>
-              <%= button_to 'Malayalam', custom_content_path("Malayalam", "languages"), method: :post, remote: true, class: 'Malayalam block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
+              <%= link_to 'Malayalam', custom_content_path("Malayalam", "languages"), method: :post, remote: true, class: 'Malayalam block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
             </li>
             <li>
-              <%= button_to 'Marathi', custom_content_path("Marathi", "languages"), method: :post, remote: true, class: 'Marathi block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
+              <%= link_to 'Marathi', custom_content_path("Marathi", "languages"), method: :post, remote: true, class: 'Marathi block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
             </li>
             <li>
-              <%= button_to 'Spanish', custom_content_path("Spanish", "languages"), method: :post, remote: true, class: 'Spanish block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
+              <%= link_to 'Spanish', custom_content_path("Spanish", "languages"), method: :post, remote: true, class: 'Spanish block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
             </li>
             <li>
-              <%= button_to 'Action', custom_content_path("Action", "type_of_content"), method: :post, remote: true, class: 'Action block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
+              <%= link_to 'Action', custom_content_path("Action", "type_of_content"), method: :post, remote: true, class: 'Action block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
             </li>
             <li>
-              <%= button_to 'Romance', custom_content_path("Romance", "type_of_content"), method: :post, remote: true, class: 'Romance block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
+              <%= link_to 'Romance', custom_content_path("Romance", "type_of_content"), method: :post, remote: true, class: 'Romance block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
             </li>
             <li>
-              <%= button_to 'Science', custom_content_path("Science", "type_of_content"), method: :post, remote: true, class: 'Science block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
+              <%= link_to 'Science', custom_content_path("Science", "type_of_content"), method: :post, remote: true, class: 'Science block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
             </li>
             <li>
-              <%= button_to 'Thrillers', custom_content_path("Thrillers", "type_of_content"), method: :post, remote: true, class: 'Thrillers block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
+              <%= link_to 'Thrillers', custom_content_path("Thrillers", "type_of_content"), method: :post, remote: true, class: 'Thrillers block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
             </li>
             <li>
-              <%= button_to 'Horror', custom_content_path("Horror", "type_of_content"), method: :post, remote: true, class: 'Horror block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
+              <%= link_to 'Horror', custom_content_path("Horror", "type_of_content"), method: :post, remote: true, class: 'Horror block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
             </li>
             <li>
-              <%= button_to 'Bollywood', custom_content_path("Bollywood", "type_of_content"), method: :post, remote: true, class: 'Bollywood block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
+              <%= link_to 'Bollywood', custom_content_path("Bollywood", "type_of_content"), method: :post, remote: true, class: 'Bollywood block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
             </li>
             <li>
-              <%= button_to 'Documentaries', custom_content_path("Documentaries", "type_of_content"), method: :post, remote: true, class: 'Documentaries block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
+              <%= link_to 'Documentaries', custom_content_path("Documentaries", "type_of_content"), method: :post, remote: true, class: 'Documentaries block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white' %>
             </li>
           </ul>
         </div>

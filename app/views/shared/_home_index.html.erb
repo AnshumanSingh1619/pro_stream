@@ -65,9 +65,9 @@
   }
 </style>
 <main class="mr-20 ml-20 mt-8">
-<%= paginate @allcontents %>
+<%= paginate @contents %>
 <div class="grid grid-cols-3 gap-4 mt-4">
-  <% @allcontents.each do |content| %>
+  <% @contents.each do |content| %>
     <% if content.poster.present? %>
       <div class="relative group">
         <% if content.seasons.present? %>

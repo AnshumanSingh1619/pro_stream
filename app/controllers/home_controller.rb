@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   include ApplicationHelper
 
   def index
-    @allcontents = @mcontents.page(params[:page]).per(5)
+    @contents = @mcontents.page(params[:page]).per(5)
   end
   
   def showcontent

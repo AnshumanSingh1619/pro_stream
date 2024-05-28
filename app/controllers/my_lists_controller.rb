@@ -4,11 +4,8 @@ class MyListsController < ApplicationController
 
   def index
     my_list = MyList.where(semi_user_id: session[:current_semi_user_id]["value"])
-    my_lists = my_list.order(id: :desc)
+    @my_lists = my_list.order(id: :desc)
     respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.update('search_results', partial: "shared/mylist", locals: { my_lists: my_lists, class_name: "mylist" })
-      end
       format.html {}
     end 
   end  
