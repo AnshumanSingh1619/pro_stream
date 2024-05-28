@@ -70,25 +70,14 @@
   <% @contents.each do |content| %>
     <% if content.poster.present? %>
       <div class="relative group">
-        <% if content.seasons.present? %>
-          <%= link_to showseason_path(content.id, content.seasons.find_by(season_no: 1).id), class: "block overflow-hidden border rounded-lg shadow-md group-hover:shadow-lg transition duration-300" do %>
-            <div class="h-72">
-              <img class="content-img object-cover w-full h-full" src="<%= url_for(content.poster) %>" />
-            </div>
-            <div class="absolute inset-0 flex justify-center items-center bg-gray-800 bg-opacity-0 group-hover:bg-opacity-75 transition duration-300 opacity-0 group-hover:opacity-100">
-              <h3 class="text-white text-xl font-semibold uppercase text-center"><%= content.name %></h3>
-            </div>
-          <% end %>
-        <% else %>  
-          <%= link_to  showcontent_path(content.id), class: "block overflow-hidden border rounded-lg shadow-md group-hover:shadow-lg transition duration-300" do %>
-            <div class="h-72">
-              <img class="content-img object-cover w-full h-full" src="<%= url_for(content.poster) %>" />
-            </div>
-            <div class="absolute inset-0 flex justify-center items-center bg-gray-800 bg-opacity-0 group-hover:bg-opacity-75 transition duration-300 opacity-0 group-hover:opacity-100">
-              <h3 class="text-white text-xl font-semibold uppercase text-center"><%= content.name %></h3>
-            </div>
-          <% end %> 
-        <% end %>       
+        <%= link_to showcontent_path(content.id), class: "block overflow-hidden border rounded-lg shadow-md group-hover:shadow-lg transition duration-300" do %>
+          <div class="h-72">
+            <img class="content-img object-cover w-full h-full" src="<%= url_for(content.poster) %>" />
+          </div>
+          <div class="absolute inset-0 flex justify-center items-center bg-gray-800 bg-opacity-0 group-hover:bg-opacity-75 transition duration-300 opacity-0 group-hover:opacity-100">
+            <h3 class="text-white text-xl font-semibold uppercase text-center"><%= content.name %></h3>
+          </div>
+        <% end %>   
       </div>
     <% end %>
   <% end %>

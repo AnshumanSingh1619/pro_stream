@@ -1,7 +1,6 @@
 class HomeController < ApplicationController
   before_action :authenticate
   before_action :set_content, only: [:showcontent, :showseason]
-  before_action :set_season, only: [:showseason]
   include ApplicationHelper
 
   def index
@@ -12,7 +11,14 @@ class HomeController < ApplicationController
   end
 
   def showseason
+    @season = @content.seasons.find(params[:season_id])
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update('showseason', partial: "shared/show_season", locals: { changed_season: @season })
+      end
+    end    
   end
+  
 
   def seasondestroy
     content = @mcontents.find(params[:content_id])

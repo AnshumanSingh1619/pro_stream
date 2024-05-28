@@ -35,6 +35,16 @@
     </div>
     <div class="contain overflow-x-auto container col-span-2" style="max-height: 750px;">
       <div class="mt-2 mb-2">
+        <% if @content.movie.present? %>
+          <button type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 btn-custom" style: "width: 100%" onclick="playVideo('<%= url_for(@content.movie) %>')">Play Movie</button>
+        <% end %>
+        <% if user_signed_in? %>
+          <% if mylisth.present? %>
+            <%= button_to "Remove from list", remove_from_list_path(@content.id), method: :delete, class: "text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900", style: "width: 100%" %>
+          <% else %>
+            <%= button_to "Add to list", add_to_list_path(@content.id), method: :post, class: "text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900", style: "width: 100%" %>
+          <% end %>
+        <% end %>  
         <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown1" class="text-grey bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800" type="button">
         Season <%= @season.season_no %>
           <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -52,13 +62,6 @@
           </ul>
         </div>
       </div> 
-      <% if user_signed_in? %>
-        <% if mylisth.present? %>
-          <%= button_to "Remove from list", remove_from_list_path(@content.id), method: :delete, class: "text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900", style: "width: 100%" %>
-        <% else %>
-          <%= button_to "Add to list", add_to_list_path(@content.id), method: :post, class: "text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900", style: "width: 100%" %>
-        <% end %>
-      <% end %>  
       <% episodes = @season.episodes.order(:episode_no) %>
       <% episodes.with_attached_episode.each do |episode| %>
         <div width="100%" height="30px" >

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :semi_users
   root to: "home#index"
   get '/prostream/content/:content_id/', to: 'home#showcontent', as: 'showcontent'
-  get '/prostream/season/:content_id/:season_id', to: 'home#showseason', as: 'showseason'
+  post '/prostream/season/:content_id/:season_id', to: 'home#showseason', as: 'showseason'
   delete '/prostream/season/:content_id/:season_id', to: 'home#seasondestroy', as: 'deleteseason'
   delete '/prostream/episode/:content_id/:season_id/:episode_id', to: 'home#episodedestroy', as: 'deletepisode'
   get '/movies', to: 'index#showmovie', as: 'show_movie'

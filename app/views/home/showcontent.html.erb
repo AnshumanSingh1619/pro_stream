@@ -1,15 +1,4 @@
 <style>
-  .modal-backdrop {
-    background-color: blue; 
-  }
-  .contain {
-    margin: auto;
-    top: 100%;
-    width: 100%;
-    color: black;
-    border-radius: 5px;
-    box-shadow: 0px 0px 2px 2px red;
-  }
   .video-player {
     width: 90%;
     position: absolute;
@@ -27,59 +16,103 @@
     left: 10px;
     cursor: pointer;
   }
+  .custom-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+  }
+  .custom-dropdown:hover .dropdown-content {
+    display: block;
+  }
 </style>
 <div id="all-page">
-<div class="mt-8">
-  <%= link_to root_path, class: 'text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800' do %>
-    <i class="fa fa-arrow-left" aria-hidden="true"></i>
-    Back to Home
-  <% end %>
-</div>
-<main class="ml-20 mt-8">
-<h1 class="text-5xl text-red-700 mt-4"><%= @content.name %></h1>
-<h1>Trailer</h1>
-<div class="grid grid-cols-10 gap-4">
-  <div class="col-span-8">
-    <% if @content.trailer.present? %>
-      <video id="my-player" width="100%" height="840" controls autoplay muted controlsList="nodownload">
-        <source src="<%= url_for(@content.trailer) %>" type="video/mp4">
-      </video>
-    <% end %>    
-  </div>  
-  <div class="col-span-2">
-    <% if @content.movie.present? %>
-      <button type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 btn-custom" onclick="playVideo('<%= url_for(@content.movie) %>')">Play Movie</button>
-      <% if user_signed_in? %>
-        <% if mylisth.present? %>
-          <%= button_to "Remove from list", remove_from_list_path(@content.id), method: :delete, class: "text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 btn-custom"%>
-        <% else %>
-          <%= button_to "Add to list", add_to_list_path(@content.id), method: :post, class: "text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 btn-custom" %>
-        <% end %>
-      <% end %>  
+  <div class="mt-8">
+    <%= link_to root_path, class: 'text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800' do %>
+      <i class="fa fa-arrow-left" aria-hidden="true"></i>
+      Back to Home
     <% end %>
+  </div>
+  <main class="mr-20 ml-20 mt-8">
+  <h1 class="text-5xl text-red-700 mt-4"><%= @content.name %></h1>
+  <div class="grid grid-cols-10 gap-7 mb-5">
+    <div class="col-span-8">
+      <% if @content.trailer.present? %>
+        <video id="my-player" width="100%" height="840" controls autoplay muted controlsList="nodownload">
+          <source src="<%= url_for(@content.trailer) %>" type="video/mp4">
+        </video>
+      <% end %>
+    </div>
+    <div class="contain overflow-x-auto container col-span-2" style="max-height: 750px;">
+      <div class="mt-2 mb-2">
+        <% if @content.movie.present? %>
+          <button type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 btn-custom" style="width: 100%" onclick="playVideo('<%= url_for(@content.movie) %>')">Play Movie</button>
+        <% end %>
+        <% if user_signed_in? %>
+          <% if mylisth.present? %>
+            <%= button_to "Remove from list", remove_from_list_path(@content.id), method: :delete, class: "text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900", style: "width: 100%" %>
+          <% else %>
+            <%= button_to "Add to list", add_to_list_path(@content.id), method: :post, class: "text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900", style: "width: 100%" %>
+          <% end %>
+        <% end %> 
+      </div>  
+      <% if @content.seasons.present? %> 
+        <div class="showseason" id="showseason">
+          <div class="mt-2 mb-2">
+            <% current_season = @content.seasons.find_by(season_no: 1) %>
+            <% if @content.seasons.count < 2 %>
+              <h1 class="text-2xl text-red-700 mt-4">Season <%= current_season.season_no %></h1>
+            <% else %>
+              <div class="custom-dropdown">
+                <button id="dropdownDefaultButton" class="dropdown-button text-grey bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                  Season <%= current_season.season_no %>
+                  <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                  </svg>
+                </button>
+                <div class="dropdown-content divide-gray-100 rounded-lg shadow  dark:bg-gray-700">
+                  <% seasons = @content.seasons.order(:season_no) %>
+                  <% seasons.each do |season| %>
+                      <%= button_to "Season #{season.season_no}", showseason_path(@content, season), method: :post, remote: true, class: "block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" %>
+                  <% end %>  
+                </div>
+              </div>
+            <% end %>  
+          </div> 
+          <% episodes = current_season.episodes.order(:episode_no) %>
+          <% episodes.with_attached_episode.each do |episode| %>
+            <div width="100%" height="30px" >
+              <p><%= "S#{current_season.season_no}" %> <%= "Ep #{episode.episode_no}" %></p>
+              <button type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" onclick="playVideo('<%= url_for(episode.episode) %>')">Play</button>
+            </div>
+          <% end %>
+        </div>  
+      <% end %>
+    </div>
   </div> 
-</div>
-<div>   
-  <br>
-  <%= @content.description %> 
-  <br>
-  <% @content.type_of_content.each do |content_type| %>
-    <%= "#{content_type}" %>
+  <div> 
+    <%= @content.description %> 
     <br>
-  <% end %>
-  <% @content.languages.each do |l| %>
-    <%= "#{l}" %>
-    <br>
-  <% end %>
-  <p>
-    <strong>Actor:</strong>
-    <%= @content.actor %>
-  </p>
-</div>
-</main>
-<% if admin_signed_in? %>
-  <%= link_to "Edit this content", edit_content_path(@content) %> |
-<% end %> 
+    <% @content.type_of_content.each do |content_type| %>
+      <%= "#{content_type}" %>
+      <br>
+    <% end %>
+    <% @content.languages.each do |l| %>
+      <%= "#{l}" %>
+      <br>
+    <% end %>
+    <p>
+      <strong>Actor:</strong>
+      <%= @content.actor %>
+    </p>
+  </div>
+  </main>
+  <% if admin_signed_in? %>
+    <%= link_to "Edit this content", edit_content_path(@content) %> |
+  <% end %>  
 </div>
 <div class="video-player" id="videoPlayer">
   <video width="100%" controls controlsList="nodownload" id="myVideo">
@@ -88,7 +121,7 @@
   <svg class="w-6 h-6 text-gray-800 dark:text-white close-btn cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4"/>
   </svg>
-</div>
+<div>
 
 <script>
   document.querySelector('.close-btn').addEventListener('click', stopVideo);
@@ -112,3 +145,8 @@
     trailerVideo.pause(); 
   } 
 </script>
+
+
+
+
+
