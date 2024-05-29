@@ -3,14 +3,14 @@ class IndexController < ApplicationController
   include ApplicationHelper
 
   def showmovie
-    @contents = @mcontents.page(params[:page]).per(5).where(movie_type: "Movie")
+    @contents = @mcontents.page(params[:page]).per(50).where(movie_type: "Movie")
     respond_to do |format|
       format.html {}
     end    
   end
 
   def showwebseries
-    @contents = @mcontents.page(params[:page]).per(5).where(movie_type: "Webseries")
+    @contents = @mcontents.page(params[:page]).per(50).where(movie_type: "Webseries")
     respond_to do |format|
       format.html {}
     end    
@@ -37,7 +37,7 @@ class IndexController < ApplicationController
   def categorised
     parameter = params[:search_term2]
     column_name = params[:column_name]
-    @contents = @mcontents.page(params[:page]).per(5).where("ARRAY[?]::varchar[] <@ #{column_name} AND ? ILIKE ANY (#{column_name}::varchar[])", parameter, parameter)
+    @contents = @mcontents.page(params[:page]).per(50).where("ARRAY[?]::varchar[] <@ #{column_name} AND ? ILIKE ANY (#{column_name}::varchar[])", parameter, parameter)
     respond_to do |format|
       format.html {}
     end  
