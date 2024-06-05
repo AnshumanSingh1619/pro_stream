@@ -10,6 +10,7 @@ class OtpAdminController < ApplicationController
       redirect_to otp_verification_path(admin_id: admin.id), alert: 'Your OTP has expired.'
     else
       if admin && admin.otp == user_provided_otp
+        debugger
         admin.update(otp: 0)
         sign_in(admin)
         redirect_to root_path, notice: 'OTP verified successfully. You are now signed in.'

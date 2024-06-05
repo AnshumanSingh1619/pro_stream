@@ -1,4 +1,8 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
+  authenticate :admin do 
+    mount Sidekiq::Web => "/sidekiq"
+  end
   resources :my_lists
   resources :contents
   devise_for :users, controllers: {
