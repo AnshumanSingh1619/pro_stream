@@ -17,14 +17,13 @@
 # every 4.days do
 #   runner "AnotherModel.prune_old_records"
 # end
-set :environment, 'production' 
+
+set :environment, 'production'
 
 set :output, './log/cron.log'
 
-every 1.minutes do 
-  # runner "puts 'Hello, world'"
-  # runner "puts Time.now"
-  # runner "User.send_content_user"
-  rake "custom:send_content_user"
+every :day, at: '4:00 pm' do
+  runner "User.send_content_user"
 end
+
 # Learn more: http://github.com/javan/whenever

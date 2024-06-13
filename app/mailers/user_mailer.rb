@@ -7,7 +7,8 @@ class UserMailer < ApplicationMailer
   end
 
 
-  def send_content(email)
-    mail(to: email, subject: "Your favorite content")
+  def send_content(user)
+    @user = user
+    mail(to: user.email, subject: "Your Subscription is going to end")
   end
 end

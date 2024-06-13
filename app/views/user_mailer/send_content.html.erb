@@ -1,5 +1,9 @@
-<h1>Hello sir</h1>
+<h1>Hello</h1>
 
 <p>
-  Jai Mata Di
+  <% if @user.gender == "Male" %>
+    Mr. <%= @user.firstname %> <%= @user.lastname %>, your plan is going to expire soon. Please update your plan.
+  <% else %>
+    Miss <%= @user.firstname %> <%= @user.lastname %>, your plan is going to expire soon. Please update your plan.
+  <% end %>  
 </p>

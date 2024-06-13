@@ -16,7 +16,7 @@ class User < ApplicationRecord
   def self.send_content_user
     users = User.all
     users.each do |user|
-      UserMailer.send_content(user.email).deliver_now
+      UserMailer.send_content(user).deliver_now
     end
   end
 
