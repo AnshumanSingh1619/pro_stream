@@ -32,9 +32,6 @@ h2{
  background-color: red;
 }
 .newsemiuser {
-  position: absolute;
-  left: 30%;
-  top: 20%;
   display: none;
 }
 @media (max-width: 740px) {
