@@ -1,32 +1,20 @@
 <style>
-  a{
-    color:red;
-  }  
   body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: rgb(162, 143, 143);
   }
   .conta{
-    margin:auto;
-    position:absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding:25px;
-    width: 35%;
-    color: black;
     border-radius:25px;
     box-shadow: 0px 0px 8px 2px black;
   }
-  .inp{
-    width: 100%;
-    height: auto;
-    margin:5px;
-    font-size:20px;
-  }
+  a{
+    color:red;
+  }  
 </style>
-<div class="conta">
-<h2 class="text-2xl" >Log in</h2>
+<div class="w-full min-h-[100vh] pt-36">
+<div class="max-w-xl w-full mx-auto conta   shadow-lg rounded-lg py-8">
+<h2 class="text-xl mb-4 text-center" >Log in</h2>
+<div class="w-3/4 mx-auto">
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <%= render "admins/shared/error_messages", resource: resource %>
   <% if alert.present? %>
@@ -34,13 +22,13 @@
   <% end %>
   <div class="field">
     <%= f.label :email ,class:"lav"%><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"inp" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"w-full rounded-lg bg-gray-50" %>
     <p>We'll never share your email with anyone else.</p>
   </div>
 
   <div class="field">
     <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password",class:"inp" %>
+    <%= f.password_field :password, autocomplete: "current-password",class:"w-full rounded-lg bg-gray-50" %>
   </div>
 
   <% if devise_mapping.rememberable? %>
@@ -55,4 +43,6 @@
   </div>
 <% end %>
 <%= render "admins/shared/links" %>
+</div>
+</div>
 </div>
