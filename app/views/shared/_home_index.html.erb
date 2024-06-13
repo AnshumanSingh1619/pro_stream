@@ -63,6 +63,11 @@
     display: inline-block;
     font-size: 16px;
   }
+  @media (max-width: 640px) {
+    .mobile-h-15 {
+      height: 3rem;
+    }
+  }
 </style>
 <main class="mr-20 ml-20 mt-8">
 <%= paginate @contents %>
@@ -71,7 +76,7 @@
     <% if content.poster.present? %>
       <div class="relative group">
         <%= link_to showcontent_path(content.id), class: "block overflow-hidden border rounded-lg shadow-md group-hover:shadow-lg transition duration-300" do %>
-          <div class="h-72">
+          <div class="h-72 mobile-h-15">
             <img class="content-img object-cover w-full h-full" src="<%= url_for(content.poster) %>" />
           </div>
           <div class="absolute inset-0 flex justify-center items-center bg-gray-800 bg-opacity-0 group-hover:bg-opacity-75 transition duration-300 opacity-0 group-hover:opacity-100">
