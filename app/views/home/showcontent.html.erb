@@ -28,15 +28,32 @@
   .custom-dropdown:hover .dropdown-content {
     display: block;
   }
+  @media (max-width: 850px) {
+    .grid-cols-10 {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    .col-span-8, .col-span-2 {
+      grid-column: span 1 / span 1;
+    }
+    .mr-20, .ml-20 {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+    .video-player {
+      width: 100%;
+      postion: absolute;
+      margin-bottom: 250px;
+    }
+  }
 </style>
 <div id="all-page">
   <div class="mt-8">
-    <%= link_to root_path, class: 'text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800' do %>
+    <%= link_to root_path, class: 'trailer_class text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800' do %>
       <i class="fa fa-arrow-left" aria-hidden="true"></i>
       Back to Home
     <% end %>
   </div>
-  <main class="mr-20 ml-20 mt-8">
+  <main class="mr-20 ml-20 mt-8 main_class">
   <h1 class="text-5xl text-red-700 mt-4"><%= @content.name %></h1>
   <div class="grid grid-cols-10 gap-7 mb-5">
     <div class="col-span-8">
@@ -46,7 +63,7 @@
         </video>
       <% end %>
     </div>
-    <div class="contain overflow-x-auto container col-span-2" style="max-height: 750px;">
+    <div class="contain overflow-x-auto container col-span-2 button_class" style="max-height: 750px;">
       <div class="mt-2 mb-2">
         <% if @content.movie.present? %>
           <button type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 btn-custom" style="width: 100%" onclick="playVideo('<%= url_for(@content.movie) %>')">Play Movie</button>
