@@ -22,9 +22,21 @@
   .home {
     color: white;
   }
-  @media (max-width: 800px) {
+  @media (max-width: 1500px) {
     .mobile-h-15 {
-      height: 3rem;
+      height: 10rem;
+    }
+    .grid {
+      grid-template-columns: repeat(2, 1fr); 
+    }
+    .mr-20, .ml-20 {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+  }
+  @media (max-width: 450px) {
+    .mobile-h-15 {
+      height: 8rem;
     }
     .grid {
       grid-template-columns: repeat(2, 1fr); 
