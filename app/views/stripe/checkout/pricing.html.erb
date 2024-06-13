@@ -4,6 +4,15 @@
     background-color: rgb(34, 23, 23);
     color: white;
   }
+  @media (max-width: 480px) {
+    .grid {
+      grid-template-columns: repeat(1, 3fr); 
+    }
+    .mr-20, .ml-20 {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+    }
+  }
 </style>
 <%= render 'shared/notice' %>
 <div class="mt-8">
