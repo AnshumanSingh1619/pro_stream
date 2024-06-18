@@ -89,6 +89,7 @@ gem "aws-sdk-s3", require: false
 
 # to perform job later
 gem "sidekiq"
+gem 'sidekiq-failures'
 
 # to use cron job
 gem "whenever"
